@@ -5,20 +5,22 @@
  */
 package minispiele;
 
+import minispiele_PingPong.PingPong;
+
 /**
  *
  * @author nmamerow
  */
 public class GUI extends javax.swing.JFrame {
-    static PingPong ping;
-    
+
     /**
      * Creates new form GUI
      */
     public GUI() {
-        initComponents();   
+        initComponents();
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,21 +57,20 @@ public class GUI extends javax.swing.JFrame {
         setJMenuBar(jMenuBar1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void PingPongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PingPongButtonActionPerformed
-       // PingPongFrame.setVisible(true);
-       ping.setVisible(true);
-       
+        PingPong ping = new PingPong("");
+        new Thread(ping).start();
+
     }//GEN-LAST:event_PingPongButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        ping = new PingPong("");
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -95,6 +96,7 @@ public class GUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GUI().setVisible(true);
             }
