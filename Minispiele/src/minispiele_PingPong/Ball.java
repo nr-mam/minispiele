@@ -5,29 +5,29 @@
  */
 package minispiele_PingPong;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import java.io.*;
+import java.util.logging.*;
 import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /**
- *
+ *Klasse zur Erstelung des PingPong-Balles welcher sich konstant bewegt und von 
+ *den Rändern sowie den Spielern Abprallt.
  * @author Richard
  */
 public class Ball extends JComponent {
 
-    private int xGeschw, yGeschw;
-    private int x, y;
+    private int xGeschw, yGeschw;//Koordinatenänderung
+    private int x, y;//Koordinaten
     private Component comp;
     private Image PingPongBall;
-    private PingPong ping;
-
+   
+    /**
+     * Erstellt den Ball an der Stelle P(x/y) und bekommt den Komponenten der 
+     * PingPong-Klasse übergeben um ihn letztendlich in der paintComponent() 
+     * Methode zeichnen zu können.
+    **/
     public Ball(int x, int y, Component comp) {
         this.x = x;
         this.y = y;
@@ -37,15 +37,26 @@ public class Ball extends JComponent {
         ladeBall();
 
     }
+    /**
+     * 
+     * @return 
+     */
 
     private Image ladeBall() {
         try {
-            PingPongBall = ImageIO.read(new File("C:\\Users\\Richard\\Documents\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\PingPongBallGruenCutted.png"));
+            PingPongBall = ImageIO.read(new File("C:\\Users\\Richard\\Documents\\"
+                    + "NetBeansProjects\\minispiele\\Minispiele\\src\\images\\"
+                    + "PingPongBallGruenCutted.png"));
         } catch (IOException ex) {
             Logger.getLogger(Ball.class.getName()).log(Level.SEVERE, null, ex);
         }
         return PingPongBall;
     }
+    
+    /**
+     * Zeichnet den PingPong-Ball.
+     * @param gr 
+     */
 
     @Override
     public void paintComponent(Graphics gr) {
@@ -53,6 +64,10 @@ public class Ball extends JComponent {
         gr.drawImage(PingPongBall, x, y, comp);
 
     }
+    /**
+     * Bewegt den PingPong-Ball und legt Fest, ab wann dieser abprallen (seine 
+     * Richtung ändern) soll.
+     */
 
     public void move() {
 

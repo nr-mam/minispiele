@@ -61,8 +61,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PingPongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PingPongButtonActionPerformed
-        PingPong ping = new PingPong("");
-        new Thread(ping).start();
+        new PingPong();//Erzeugen des PingPong-Spieles
 
     }//GEN-LAST:event_PingPongButtonActionPerformed
 
