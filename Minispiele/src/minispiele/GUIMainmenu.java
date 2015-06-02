@@ -31,9 +31,8 @@ public class GUIMainmenu extends javax.swing.JFrame {
     private void initComponents() {
 
         PingPongButton = new javax.swing.JButton();
+        jButtonSnake = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuDatei = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MainFrame");
@@ -48,13 +47,11 @@ public class GUIMainmenu extends javax.swing.JFrame {
         });
         getContentPane().add(PingPongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 120, 50));
 
+        jButtonSnake.setText("Snake");
+        getContentPane().add(jButtonSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 120, 50));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backgroundMenu.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 330));
-
-        jMenuDatei.setText("Datei");
-        jMenuBar1.add(jMenuDatei);
-
-        setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
@@ -105,8 +102,7 @@ public class GUIMainmenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PingPongButton;
+    private javax.swing.JButton jButtonSnake;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuDatei;
     // End of variables declaration//GEN-END:variables
 }
