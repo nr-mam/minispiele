@@ -27,7 +27,7 @@ public class Spieler {
         this.color = color;
         this.x = x;
         y = 100;
-        this.deltaY = 15;
+        this.deltaY = 4;
     }
 
     public void move(int i) {

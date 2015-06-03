@@ -22,7 +22,7 @@ import javax.swing.*;
  */
 public class PingPong extends JPanel implements Runnable, KeyListener {
 
-    public final static int WIDTH_FRAME = 1207, HEIGHT_FRAME = 777;
+    public final static int WIDTH_FRAME = 1206, HEIGHT_FRAME = 776;
     public final static int WIDTH_FIELD = 1200, HEIGHT_FIELD = 750;
     private int HOCH_SPIELER1, RUNTER_SPIELER1;
     private int HOCH_SPIELER2, RUNTER_SPIELER2, schwierigkeit = 15;
@@ -71,7 +71,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
         //lade Hintergundbild
         ladeHintergrundbild();
         //setze Hintergrundbild
-        // ppFrame.add(new JLabel(new ImageIcon(HintergrundPingPong)));
+        JLabel Hintergrund = new JLabel(new ImageIcon(HintergrundPingPong));
+        System.out.println(Hintergrund.getWidth());
         //ppFrame.pack();
         System.out.println("Steuerung: W/S und Pfeil hoch/Pfeil runter");
         //Frame sichtbar machen
@@ -109,7 +110,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
         this.spieler1 = spieler1;
         this.ki = ki;
         //Ball
-        ball = new Ball(100, 100, this);
+        ball = new Ball(575, 350, this);
         //lade Hintergundbild
         ladeHintergrundbild();
         //setze Hintergrundbild
@@ -202,7 +203,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
             }
             //SOLO
             if (solo) {
-                ki.move();
+                ki.move(ball);
                 if (kollisionPruefen(spieler1, ball)) {
                     ball.setxGeschw(Ball.V);
                 }
@@ -223,7 +224,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
 
             repaint();
             try {
-                Thread.sleep(schwierigkeit);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(PingPong.class.getName()).log(Level.SEVERE, null, ex);
             }
