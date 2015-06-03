@@ -5,7 +5,10 @@
  */
 package minispiele;
 
+import java.awt.Color;
+import minispiele_PingPong.KI;
 import minispiele_PingPong.PingPong;
+import minispiele_PingPong.Spieler;
 
 /**
  *
@@ -13,10 +16,16 @@ import minispiele_PingPong.PingPong;
  */
 public class GUIMainmenu extends javax.swing.JFrame {
 
+    private final int SCHWER, MITTEL, LEICHT;
+
     /**
      * Creates new form GUI
      */
     public GUIMainmenu() {
+
+        SCHWER = 7;
+        MITTEL = 13;
+        LEICHT = 18;
         initComponents();
 
     }
@@ -58,7 +67,8 @@ public class GUIMainmenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PingPongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PingPongButtonActionPerformed
-        new PingPong();//Erzeugen des PingPong-Spieles
+        new PingPong(new Spieler(100, Color.WHITE), new Spieler(1100, Color.RED));
+        new PingPong(new Spieler(100, Color.ORANGE), new KI(1100, Color.RED, SCHWER), MITTEL);
 
     }//GEN-LAST:event_PingPongButtonActionPerformed
 
