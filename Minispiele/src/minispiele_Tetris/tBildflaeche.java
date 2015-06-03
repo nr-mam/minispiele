@@ -9,12 +9,17 @@ package minispiele_Tetris;
  *
  * @author Marc
  */
-public class Tetris {
+public class tBildflaeche {
 
-    public Tetris() {
+    private final int SIZE_WIDTH = 300;
+    private final int SIZE_HEIGHT = 600;
+    private tBlock aktiverBlock;
+    private int[][] spielfläche;
     
-    
+    public tBildflaeche() {
+        
+        
+        
     }
-    
     
 }
