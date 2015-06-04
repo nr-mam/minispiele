@@ -26,10 +26,10 @@ public class TBaustein extends JComponent {
     private int ID; // Typ des Blocks
     private int xmom, ymom; // X-/ Y- Position des Blocks
 
-    public void tBLock(int blockID) {
+    TBaustein(int blockID) {
 
             try {
-            img = ImageIO.read( new File("Z:\\GK inf 2Sem\\minispiele\\Minispiele\\src\\images\\Tetris_img\\blockteil.jpg"));
+            img = ImageIO.read( new File("../images/images.Tetris_img/Block_Blau.jpg"));
         } catch (IOException e) {
         }
 
