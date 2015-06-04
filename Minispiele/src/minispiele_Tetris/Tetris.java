@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  */
 public class Tetris extends JPanel implements Runnable {
 
-    private TBausteine block = new TBausteine(1);
+//    private TBausteine block = new TBausteine(1);
 
     public Tetris() {
         JFrame frame = new JFrame();
@@ -31,7 +31,7 @@ public class Tetris extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        block.paintComponent(gr);
+        //block.paintComponent(gr);
 
     }
 

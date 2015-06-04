@@ -26,7 +26,7 @@ public class tBlock extends JComponent {
     private int ID; // Typ des Blocks
     private int xmom, ymom; // X-/ Y- Position des Blocks
 
-    public tBLock(int blockID) {
+    public void tBLock(int blockID) {
 
             try {
             img = ImageIO.read( new File("Z:\\GK inf 2Sem\\minispiele\\Minispiele\\src\\images\\Tetris_img\\blockteil.jpg"));
