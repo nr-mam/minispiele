@@ -9,9 +9,10 @@ package minispiele_Tetris;
  *
  * @author Marc
  */
-public class TBlock {
+public class Block {
 
-    public TBlock() {
+    public Block() {
+    
     }
     
 }
