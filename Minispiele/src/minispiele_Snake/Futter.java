@@ -5,17 +5,13 @@
  */
 package minispiele_Snake;
 
+import java.awt.Component;
+
 /**
  *
  * @author nmamerow
  */
-public class Snake {
-
-    public final static int WIDTH_FRAME = 730, HEIGHT_FRAME = 450;
-    public final static int WIDTH_FIELD = 720, HEIGHT_FIELD = 440;
-
-    public Snake() {
-
-    }
-
+public class Futter {
+    int xKoordinate,yKoordinate;
+    Component comp;
 }
