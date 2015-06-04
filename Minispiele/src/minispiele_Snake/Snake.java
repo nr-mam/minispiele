@@ -7,8 +7,8 @@ package minispiele_Snake;
 
 /**
  *
- * @author Windows7
+ * @author nmamerow
  */
-public class Snake {
+class Snake {
     
 }
