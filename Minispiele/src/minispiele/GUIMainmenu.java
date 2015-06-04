@@ -6,6 +6,7 @@
 package minispiele;
 
 import minispiele_PingPong.Einstellungen;
+import minispiele_Tetris.Tetris;
 
 
 
@@ -39,6 +40,7 @@ public class GUIMainmenu extends javax.swing.JFrame {
 
         PingPongButton = new javax.swing.JButton();
         jButtonSnake = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +59,14 @@ public class GUIMainmenu extends javax.swing.JFrame {
         jButtonSnake.setText("Snake");
         getContentPane().add(jButtonSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 120, 50));
 
+        jButton1.setText("Tetris");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 120, 50));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backgroundMenu.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 330));
 
@@ -70,6 +80,10 @@ public class GUIMainmenu extends javax.swing.JFrame {
         einstellungen.setVisible(true);
         
     }//GEN-LAST:event_PingPongButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Tetris();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +125,7 @@ public class GUIMainmenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PingPongButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonSnake;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
