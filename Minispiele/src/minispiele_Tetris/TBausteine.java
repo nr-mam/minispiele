@@ -103,6 +103,7 @@ public class TBausteine extends JComponent {
 
     @Override
     public void paintComponent(Graphics gr) {
+        super.paintComponent(gr);
         
 
     }
