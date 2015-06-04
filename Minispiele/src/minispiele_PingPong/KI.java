@@ -25,9 +25,10 @@ public class KI extends Spieler {
     public KI(int x, Color color, int schwierigkeit) {
         super(x, color);
         this.x = x;
-        y = 300;
         HOEHE_SPIELER = 150;
         BREITE_SPIELER = 20;
+        y = 150;
+        
 
         this.schwierigkeit = schwierigkeit;
         this.color = color;
