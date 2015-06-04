@@ -1,5 +1,3 @@
- 
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,16 +8,15 @@ package minispiele_PingPong;
 import java.awt.Color;
 import java.awt.Graphics;
 
-
 /**
  *
  * @author Richard
  */
 public class Spieler {
 
-    private final int HOEHE, BREITE;
-    private int deltaY, y, x;
-    private Color color;
+    private final int deltaY, HOEHE, BREITE;
+    private final Color color;
+    private int y, x;
 
     public Spieler(int x, Color color) {
         HOEHE = 150;
@@ -48,8 +45,6 @@ public class Spieler {
         }
 
     }
-    
-    
 
     public void paintComponent(Graphics gr) {
         gr.setColor(color);

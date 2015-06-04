@@ -43,7 +43,6 @@ public class Ball extends JComponent {
         this.yGeschw = V;
         this.comp = comp;
         ladeBall();
-
     }
 
     /**
@@ -57,9 +56,6 @@ public class Ball extends JComponent {
         }
         return PingPongBall;
     }
-    
-    
-    
 
     /**
      * Zeichnet den PingPong-Ball.

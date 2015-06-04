@@ -1,5 +1,3 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +7,8 @@ package minispiele_PingPong;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.logging.*;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 
 /**
  * Erstellt das PingPong-Spiel.
@@ -24,16 +19,19 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
 
     public final static int WIDTH_FRAME = 1206, HEIGHT_FRAME = 776;
     public final static int WIDTH_FIELD = 1200, HEIGHT_FIELD = 750;
-    private int HOCH_SPIELER1, RUNTER_SPIELER1;
-    private int HOCH_SPIELER2, RUNTER_SPIELER2, schwierigkeit = 15;
+    private int HOCH_SPIELER1,
+            RUNTER_SPIELER1,
+            HOCH_SPIELER2,
+            RUNTER_SPIELER2,
+            schwierigkeit = 15;
     private boolean up1, down1, up2, down2, multiplayer, solo;
 
     private Spieler spieler1, spieler2;
-    private final Ball ball;
+    private Ball ball;
     private KI ki;
 
-    private Image HintergrundPingPong;
     private JFrame ppFrame;
+    private JLayeredPane layers;
 
     /**
      * Erstellt zwei Spieler (Multiplayer)
@@ -42,41 +40,16 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
      * @param spieler2
      */
     public PingPong(Spieler spieler1, Spieler spieler2) {
-
         multiplayer = true;
-        //Component
-        this.setFocusable(true);
-        this.addKeyListener(this);
-        //Frame
-        ppFrame = new JFrame();
-        ppFrame.setMinimumSize(new Dimension(WIDTH_FRAME, HEIGHT_FRAME));
-        ppFrame.setResizable(false);
-        ppFrame.add(this);
-        ppFrame.setTitle("PINGPONG --- MODUS: MULTIPLAYER");
-        ppFrame.setLocationRelativeTo(null);
-        //Variablen
+        this.spieler2 = spieler2;
+
         HOCH_SPIELER1 = KeyEvent.VK_W;
         RUNTER_SPIELER1 = KeyEvent.VK_S;
         HOCH_SPIELER2 = KeyEvent.VK_UP;
         RUNTER_SPIELER2 = KeyEvent.VK_DOWN;
-        up1 = false;
-        down1 = false;
-        up2 = false;
-        down2 = false;
-        
-        this.spieler1 = spieler1;
-        this.spieler2 = spieler2;
-        //Ball
-        ball = new Ball(100, 100, this);
-        //lade Hintergundbild
-        ladeHintergrundbild();
-        //setze Hintergrundbild
-        JLabel Hintergrund = new JLabel(new ImageIcon(HintergrundPingPong));
-        System.out.println(Hintergrund.getWidth());
-        //ppFrame.pack();
+
         System.out.println("Steuerung: W/S und Pfeil hoch/Pfeil runter");
-        //Frame sichtbar machen
-        ppFrame.setVisible(true);
+        setSimilarities("PINGPONG --- MODUS: MULTIPLAYER", spieler1);
         //Starten des Spieles
         new Thread(this).start();
 
@@ -90,53 +63,59 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
      * @param schwierigkeit 10 = schwer 50 = leicht;
      */
     public PingPong(Spieler spieler1, KI ki, int schwierigkeit) {
+
         solo = true;
-        //Component
-        this.setFocusable(true);
-        this.addKeyListener(this);
-        //Frame
-        ppFrame = new JFrame();
-        ppFrame.setMinimumSize(new Dimension(WIDTH_FRAME, HEIGHT_FRAME));
-        ppFrame.setResizable(false);
-        ppFrame.add(this);
-        ppFrame.setTitle("PINGPONG --- MODUS: SOLO");
-        ppFrame.setLocationRelativeTo(null);
-        //Variablen
+        this.schwierigkeit = schwierigkeit;
+        this.ki = ki;
         HOCH_SPIELER1 = KeyEvent.VK_UP;
         RUNTER_SPIELER1 = KeyEvent.VK_DOWN;
-        up1 = false;
-        down1 = false;
-        this.schwierigkeit = schwierigkeit;
-        this.spieler1 = spieler1;
-        this.ki = ki;
-        //Ball
-        ball = new Ball(575, 350, this);
-        //lade Hintergundbild
-        ladeHintergrundbild();
         //setze Hintergrundbild
         // ppFrame.add(new JLabel(new ImageIcon(HintergrundPingPong)));
         //ppFrame.pack();
-
-        //Frame sichtbar machen
-        ppFrame.setVisible(true);
         //Starten des Spieles
+        setSimilarities("PINGPONG --- MODUS: SOLO", spieler1);
         new Thread(this).start();
 
     }
 
-    /**
-     * Lädt das Hintergrundbild.
-     *
-     * @return Gibt das Hintergrundbild zurück.
-     */
-    private Image ladeHintergrundbild() {
+    public void setSimilarities(String title, Spieler spieler1) {
+        setOpaque(false);
+        setFocusable(true);
+        addKeyListener(this);
+        this.spieler1 = spieler1;
 
-        try {
-            HintergrundPingPong = ImageIO.read(PingPong.class.getResource("../images/PingPongFeld.jpg"));
-        } catch (IOException e) {
-        }
+        up1 = false;
+        down1 = false;
+        up2 = false;
+        down2 = false;
 
-        return HintergrundPingPong;
+        JLabel labelHintergrund = new JLabel();
+
+        ppFrame = new JFrame();
+        ppFrame.setMinimumSize(new Dimension(WIDTH_FRAME,HEIGHT_FRAME));
+        ppFrame.setResizable(false);
+
+        ball = new Ball(100, 100, this);
+
+        //Layers
+        layers = new JLayeredPane();
+        layers.add(this);
+        this.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
+        layers.setLayer(this, javax.swing.JLayeredPane.MODAL_LAYER);
+        layers.setLayer(labelHintergrund, JLayeredPane.FRAME_CONTENT_LAYER);
+        labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass()
+                .getResource("/images/PingPongFeld.jpg"))); // NOI18N
+        layers.add(labelHintergrund);
+        labelHintergrund.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
+        layers.setLayer(labelHintergrund, JLayeredPane.DEFAULT_LAYER);
+        
+        ppFrame.add(layers);
+        ppFrame.setTitle(title);
+        //Zentrieren
+        ppFrame.setLocationRelativeTo(null);
+
+        ppFrame.pack();
+        ppFrame.setVisible(true);
     }
 
     public boolean kollisionPruefen(Spieler spieler, Ball ball) {
@@ -145,7 +124,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
         return spielerHitbox.intersects(ballHitbox);
 
     }
-     public boolean kollisionPruefen(KI ki, Ball ball) {
+
+    public boolean kollisionPruefen(KI ki, Ball ball) {
         Rectangle kiHitbox = new Rectangle(ki.getX(), ki.getY(), ki.getBREITE(), ki.getHOEHE());
         Rectangle ballHitbox = new Rectangle(ball.getX(), ball.getY(), 50, 50);
         return kiHitbox.intersects(ballHitbox);
@@ -160,11 +140,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        //Hintergrund zeichnen
-        gr.drawImage(HintergrundPingPong, 0, 0, this);
         //Ball zeichnen
         ball.paintComponent(gr);
-
         spieler1.paintComponent(gr);
         if (multiplayer) {
             spieler2.paintComponent(gr);
@@ -266,7 +243,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        
+
     }
 
 }
