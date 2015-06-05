@@ -31,7 +31,8 @@ public class TBaustein extends JComponent {
     private int queue; // Wartezeit, bis der Block sich um eine Ebene bewegen soll
 
     TBaustein(int blockID) {
-
+        X = 180;
+        Y = 30;
         queue = 0;
 
         try {
@@ -91,7 +92,7 @@ public class TBaustein extends JComponent {
         for (int i = 0; i < blockForm.length; i++) {
             for (int j = 0; j < blockForm[i].length; j++) {
                 if (blockForm[i][j] == 1) {
-                    gr.drawImage(img, ((i * 30) + 1), ((j * 30) + 1), this);
+                    gr.drawImage(img, ((i * 30)+X), ((j * 30)+Y), this);
                 }
 
             }
@@ -109,22 +110,32 @@ public class TBaustein extends JComponent {
     }
 
     //Methoden zur Blockbewegung
-    public void moveBlockLeft() {
-        X += 30;
-    }
-
-    public void moveBlockRight() {
-        Y += 30;
-    }
-
-    public void moveBlockDown() {
-
-        if (queue == 500) {
-            Y -= 30;
-            queue = 0;
-        } else {
-            queue++;
+    public void moveBlockLeft(int grenze) {
+        if (grenze!=X){
+        X -= 30;
         }
+        
+    }
+
+    public void moveBlockRight(int grenze) {
+        if (grenze!=(X+(30*(ymax-1)))){
+        X += 30;
+        }
+    }
+
+    public boolean moveBlockDown(int grenze) {
+        queue++;
+        if(queue > 5){
+        Y += 30;
+        queue = 0;
+        } else {
+        
+        }
+        if (grenze==(Y+(30*(xmax-2)))){
+        return true;
+        }
+        
+        return false;           
     }
 
 }
