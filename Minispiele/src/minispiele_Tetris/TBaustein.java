@@ -11,8 +11,11 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import minispiele_PingPong.PingPong;
 
 /**
  *
@@ -24,15 +27,18 @@ public class TBaustein extends JComponent {
     private int[][] blockForm; // Speichert die Form des jeweiligen Typs
     private Image img; // Blockbild
     private int ID; // Typ des Blocks
-    private int xmom, ymom; // X-/ Y- Position des Blocks
+    private int X, Y; // X-/ Y- Position des Blocks
+    private int queue; // Wartezeit, bis der Block sich um eine Ebene bewegen soll
 
     TBaustein(int blockID) {
 
-            try {
-            img = ImageIO.read( new File("../images/images.Tetris_img/Block_Blau.jpg"));
-        } catch (IOException e) {
-        }
+        queue = 0;
 
+        try {
+            img = ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_blau.jpg"));
+        } catch (IOException e) {
+            System.out.println("Couldn't find Image.");
+        }
 
         if (blockID == -1) {
             Random r = new Random();
@@ -41,76 +47,84 @@ public class TBaustein extends JComponent {
             ladeBloecke(blockID);
         }
     }
-    
-        
 
     private void ladeBloecke(int ID) {
 
         this.ID = ID;
 
         if (ID == 0) {
-            xmax = 0;
-            ymax = 3;
             blockForm = new int[][]{{1}, {1}, {1}, {1}};
         }
 
         if (ID == 1) {
-            xmax = 2;
-            ymax = 1;
             blockForm = new int[][]{{1, 1, 1}, {0, 1, 0}};
         }
 
         if (ID == 2) {
-            xmax = 1;
-            ymax = 1;
             blockForm = new int[][]{{1, 1}, {1, 1}};
         }
 
         if (ID == 3) {
-            xmax = 1;
-            ymax = 2;
             blockForm = new int[][]{{1, 0}, {1, 0}, {1, 1}};
         }
 
         if (ID == 4) {
-            xmax = 1;
-            ymax = 2;
             blockForm = new int[][]{{0, 1}, {0, 1}, {1, 1}};
         }
 
         if (ID == 5) {
-            xmax = 2;
-            ymax = 1;
             blockForm = new int[][]{{0, 1, 1}, {1, 1, 0}};
         }
 
         if (ID == 6) {
-            xmax = 2;
-            ymax = 1;
             blockForm = new int[][]{{0, 1, 1}, {1, 1, 0}};
         }
 
+        ymax = blockForm.length;
+        xmax = blockForm[ymax - 1].length;
+
     }
 
-    public void blockZeichnen(Graphics gr){
-    for (int i = 0; i < xmax; i++) {
-            for (int j = 0; j < ymax; j++) {
+    @Override
+    public void paintComponent(Graphics gr) {
+
+        for (int i = 0; i < blockForm.length; i++) {
+            for (int j = 0; j < blockForm[i].length; j++) {
                 if (blockForm[i][j] == 1) {
-                    gr.drawImage(img, ((i + 1) * 30), ((j + 1) * 30), this);
+                    gr.drawImage(img, ((i * 30) + 1), ((j * 30) + 1), this);
                 }
 
             }
 
         }
+
     }
-    
-    @Override
-    public void paintComponent(Graphics gr) {
-        //gr.fillRect(0, 0, 30, 30);       
-        gr.setColor(Color.red);
 
-        
+    public int getX() {
+        return X;
+    }
 
+    public int getY() {
+        return Y;
+    }
+
+    //Methoden zur Blockbewegung
+    public void moveBlockLeft() {
+        X += 30;
+    }
+
+    public void moveBlockRight() {
+        Y += 30;
+    }
+
+    public void moveBlockDown() {
+
+        if (queue == 500) {
+            Y -= 30;
+            queue = 0;
+        } else {
+            queue++;
+        }
     }
 
 }
