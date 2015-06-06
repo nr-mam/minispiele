@@ -34,19 +34,19 @@ public class TBaustein extends JComponent {
     TBaustein(int blockID) {
         X = 180;
         Y = 30;
+        //X=30;
+        //Y=30;
         queue = 0;
         try {
-        imgs = new Image[7];
-        imgs[0] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_blau.jpg"));
-        imgs[1] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_cyan.jpg"));
-        imgs[2] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_dunkelgrün.jpg"));
-        imgs[3] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_gelb.jpg"));
-        imgs[4] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_grün.jpg"));
-        imgs[5] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_lila.jpg"));
-        imgs[6] =  ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\Block_rot.jpg"));
+            imgs = new Image[7];
+            imgs[0] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_blau.jpg"));
+            imgs[1] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_cyan.jpg"));
+            imgs[2] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_dunkelgrün.jpg"));
+            imgs[3] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_gelb.jpg"));
+            imgs[4] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_grün.jpg"));
+            imgs[5] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_lila.jpg"));
+            imgs[6] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_rot.jpg"));
 
-        
-            
         } catch (IOException e) {
             System.out.println("Couldn't find Image.");
         }
@@ -54,6 +54,7 @@ public class TBaustein extends JComponent {
         if (blockID == -1) {
             Random r = new Random();
             ladeBloecke(r.nextInt(7));
+            //ladeBloecke(4);
         } else {
             ladeBloecke(blockID);
         }
@@ -79,12 +80,12 @@ public class TBaustein extends JComponent {
         }
 
         if (ID == 3) {
-            blockForm = new int[][]{{1, 0}, {1, 0}, {1, 1}};
+            blockForm = new int[][]{{1,0},{1,0},{1,1}};
             img = imgs[3];
         }
 
         if (ID == 4) {
-            blockForm = new int[][]{{0, 1}, {0, 1}, {1, 1}};
+            blockForm = new int[][]{{1,1},{1,0},{1,0}};
             img = imgs[4];
         }
 
@@ -94,7 +95,7 @@ public class TBaustein extends JComponent {
         }
 
         if (ID == 6) {
-            blockForm = new int[][]{{0, 1, 1}, {1, 1, 0}};
+            blockForm = new int[][]{{1, 1, 0}, {0, 1, 1}};
             img = imgs[6];
         }
 
@@ -109,7 +110,7 @@ public class TBaustein extends JComponent {
         for (int i = 0; i < blockForm.length; i++) {
             for (int j = 0; j < blockForm[i].length; j++) {
                 if (blockForm[i][j] == 1) {
-                    gr.drawImage(img, ((i * 30)+X), ((j * 30)+Y), this);                    
+                    gr.drawImage(img, ((i * 30) + X), ((j * 30) + Y), this);
                 }
 
             }
@@ -145,39 +146,34 @@ public class TBaustein extends JComponent {
     public int getYmax() {
         return ymax;
     }
-    
-    
-    
 
     //Methoden zur Blockbewegung
     public void moveBlockLeft(int grenze) {
-        if (grenze!=X){
-        X -= 30;
+        if (grenze != X) {
+            X -= 30;
         }
-        
+
     }
 
     public void moveBlockRight(int grenze) {
-        if (grenze!=(X+(30*(ymax-1)))){
-        X += 30;
+        if (grenze != (X + (30 * (ymax - 1)))) {
+            X += 30;
         }
     }
 
     public boolean moveBlockDown(int grenze) {
         queue++;
-        if(queue > 5){
-        Y += 30;
-        queue = 0;
+        if (queue > 5) {
+            Y += 30;
+            queue = 0;
         } else {
-        
+
         }
-        if (grenze==(Y+(30*(xmax-2)))){
-        return true;
+        if (grenze == (Y + (30 * (xmax - 2)))) {
+            return true;
         }
-        
-        return false;           
+
+        return false;
     }
-    
-    
 
 }

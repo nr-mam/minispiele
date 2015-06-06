@@ -29,7 +29,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
 
     private TBaustein block = new TBaustein(-1);
     private int LINKS_BEWEGUNG, RECHTS_BEWEGUNG, UNTEN_BEWEGUNG;
-    private boolean links, rechts, unten;
+    private boolean links, rechts, unten, stop;
     private final int GRENZE_UNTEN = 600, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
     private Image img;
     private int[][] spielflaeche;
@@ -41,9 +41,10 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
         links = false;
         rechts = false;
+        stop = false;
         initialisiereSpielflaeche();
         try {
-            img = ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\TetrisFeld.jpg"));
+            img = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\TetrisFeld.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +98,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         while (true) {
             wartezeit = 70;
 
-            if (links) {
+            if (links) {                
                 block.moveBlockLeft(GRENZE_LINKS);
             }
             if (rechts) {
@@ -108,25 +109,32 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 wartezeit = 40;
             }
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
+            //boolean isUnten = false;
 
-            int x1 = ((block.getX() / 30) - 1);
-            int y1 = (((block.getY() / 30) - 1) + block.getYmax());
-            y1--;
-            int x2, y2;
-            int verweis = block.getYmax()-1;
-            int[] xZeile = block.getBlockForm()[verweis];
-            for (int i = 0; i < xZeile.length; i++) {
-                x2 = x1 + i;
-                if (xZeile[i] == 0) {
-                    if (spielflaeche[x2][y1] != -1) {
-                        isUnten = true;
+            int x1, y1, y2;
+            int[] geprüft = new int[block.getBlockForm()[0].length];
+            for (int i = 0; i < geprüft.length; i++) {
+                geprüft[i] = 0;
+            }
+
+            for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
+                for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                    x1 = (((block.getX() / 30) + i));
+                    y1 = (((block.getY() / 30) + j) - 1);
+                    if (block.getBlockForm()[i][j] == 0 && geprüft[j] == 0) {
+                        geprüft[j] = 1;
+                        if (spielflaeche[x1][y1] != -1) {
+                            isUnten = true;
+                        }
                     }
-                }
-                if (xZeile[i] == 1) {
-                    y2 = y1 + 1;
-                    if (spielflaeche[x2][y2] != -1) {
-                        isUnten = true;
+
+                    if (block.getBlockForm()[i][j] == 1) {
+                        y2 = y1 + 1;
+                        if (spielflaeche[x1][y2] != -1) {
+                            isUnten = true;
+                        }
                     }
+
                 }
 
             }
