@@ -6,16 +6,12 @@
 package minispiele_PingPong;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import static minispiele_PingPong.PingPong.HEIGHT_FIELD;
-import static minispiele_PingPong.PingPong.HEIGHT_FRAME;
 import static minispiele_PingPong.PingPong.WIDTH_FIELD;
-import static minispiele_PingPong.PingPong.WIDTH_FRAME;
+
 
 /**
  *
@@ -32,31 +28,18 @@ public class PingPongFrame extends javax.swing.JFrame {
      */
     public PingPongFrame(String title, Component comp, Ball ball) {
         initComponents();
-        Gewinnermeldung.setLocationRelativeTo(null);
+        //Gewinnermeldung.setLocationRelativeTo(null);
         this.ball = ball;
-
-        
-        JLabel labelHintergrund = new JLabel();
-
         this.title = title;
         this.comp = comp;
+        
+        labelGewinnermeldung.setVisible(false);
 
         layers.add(comp);
         comp.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
-        layers.setLayer(comp, javax.swing.JLayeredPane.MODAL_LAYER);
-        layers.setLayer(labelHintergrund, JLayeredPane.FRAME_CONTENT_LAYER);
-        labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass()
-                .getResource("/images/PingPongFeld.jpg"))); // NOI18N
-        layers.add(labelHintergrund);
-        labelHintergrund.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
-        layers.setLayer(labelHintergrund, JLayeredPane.DEFAULT_LAYER);
-
+        layers.setLayer(comp, JLayeredPane.MODAL_LAYER);
         add(layers);
         setTitle(title);
-        //Zentrieren
-        setLocationRelativeTo(null);
-
-        pack();
         setVisible(true);
     }
 
@@ -69,34 +52,11 @@ public class PingPongFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Gewinnermeldung = new javax.swing.JDialog();
-        labelGewinnermeldung = new javax.swing.JLabel();
         layers = new javax.swing.JLayeredPane();
         tfPunkteLinks = new javax.swing.JTextField();
         tfPunkteRechts = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-
-        Gewinnermeldung.setTitle("!!!");
-        Gewinnermeldung.setAlwaysOnTop(true);
-        Gewinnermeldung.setMinimumSize(new java.awt.Dimension(180, 79));
-        Gewinnermeldung.setResizable(false);
-        Gewinnermeldung.setType(java.awt.Window.Type.POPUP);
-
-        labelGewinnermeldung.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout GewinnermeldungLayout = new javax.swing.GroupLayout(Gewinnermeldung.getContentPane());
-        Gewinnermeldung.getContentPane().setLayout(GewinnermeldungLayout);
-        GewinnermeldungLayout.setHorizontalGroup(
-            GewinnermeldungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GewinnermeldungLayout.createSequentialGroup()
-                .addComponent(labelGewinnermeldung, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        GewinnermeldungLayout.setVerticalGroup(
-            GewinnermeldungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelGewinnermeldung, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        labelGewinnermeldung = new javax.swing.JLabel();
+        labelHintergrund = new javax.swing.JLabel();
 
         tfPunkteLinks.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         tfPunkteLinks.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -112,58 +72,33 @@ public class PingPongFrame extends javax.swing.JFrame {
         layers.add(tfPunkteRechts);
         tfPunkteRechts.setBounds(620, 10, 110, 60);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPongFeld.jpg"))); // NOI18N
-        layers.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1200, 750);
+        labelGewinnermeldung.setBackground(new java.awt.Color(255, 255, 255));
+        labelGewinnermeldung.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        labelGewinnermeldung.setForeground(new java.awt.Color(255, 0, 0));
+        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        layers.add(labelGewinnermeldung);
+        labelGewinnermeldung.setBounds(350, 310, 500, 110);
+
+        labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPongFeld.jpg"))); // NOI18N
+        layers.add(labelHintergrund);
+        labelHintergrund.setBounds(0, 0, 1200, 750);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(layers, javax.swing.GroupLayout.DEFAULT_SIZE, 1191, Short.MAX_VALUE)
+            .addComponent(layers, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(layers, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addComponent(layers, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setBounds(0, 0, 1207, 789);
+        setSize(new java.awt.Dimension(1216, 788));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PingPongFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PingPongFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PingPongFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PingPongFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PingPongFrame(title, comp, ball).setVisible(true);
-            }
-        });
-    }
+    
 
     public JTextField getTfPunkteLinks() {
         return tfPunkteLinks;
@@ -177,16 +112,10 @@ public class PingPongFrame extends javax.swing.JFrame {
         return labelGewinnermeldung;
     }
 
-    public JDialog getGewinnermeldung() {
-        return Gewinnermeldung;
-    }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog Gewinnermeldung;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel labelGewinnermeldung;
+    public javax.swing.JLabel labelGewinnermeldung;
+    private javax.swing.JLabel labelHintergrund;
     private javax.swing.JLayeredPane layers;
     private javax.swing.JTextField tfPunkteLinks;
     private javax.swing.JTextField tfPunkteRechts;

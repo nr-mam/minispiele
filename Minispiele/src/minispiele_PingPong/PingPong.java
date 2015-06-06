@@ -15,7 +15,7 @@ import javax.swing.*;
  *
  * @author Richard
  */
-public class PingPong extends JPanel implements Runnable, KeyListener {
+public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     public final static int WIDTH_FRAME = 1206,
             HEIGHT_FRAME = 776,
@@ -42,6 +42,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
     private JFrame ppFrame;
     private JLayeredPane layers;
 
+    private Thread thread;
+
     /**
      * Erstellt zwei Spieler (Multiplayer)
      *
@@ -63,7 +65,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
         pframe = new PingPongFrame("PINGPONG --- MODUS: MULTIPLAYER", this, ball);
         setSimilarities(spieler1);
         //Starten des Spieles
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
 
     }
 
@@ -75,7 +78,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
      * @param schwierigkeit 10 = schwer 50 = leicht;
      */
     public PingPong(Spieler spieler1, KI ki) {
-        
+
         solo = true;
         this.ki = ki;
 
@@ -85,7 +88,8 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
         pframe = new PingPongFrame("PINGPONG --- MODUS: SOLO", this, ball);
         setSimilarities(spieler1);
         //Starten des Spieles
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
 
     }
 
@@ -149,16 +153,7 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
     public void run() {
 
         while (true) {
-            if(pzLinks.maxPunkteVergleichen()){
-                pframe.setVisible(false);
-                pframe.getLabelGewinnermeldung().setText("Spieler 1 gewinnt!");
-                pframe.getGewinnermeldung().setVisible(true);
-            }
-            if(pzRechts.maxPunkteVergleichen()){
-                pframe.setVisible(false);
-                pframe.getLabelGewinnermeldung().setText("Spieler 2 gewinnt!");
-                pframe.getGewinnermeldung().setVisible(true);
-            }
+
             ball.move();
             //STEUERUNG
             if (up1) {
@@ -185,6 +180,17 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
                     ball.setxGeschw(-Ball.V);
                 }
 
+                if (pzRechts.maxPunkteVergleichen()) {
+                    pframe.getLabelGewinnermeldung().setText("Spieler 1 gewinnt!");
+                    pframe.labelGewinnermeldung.setVisible(true);
+                    thread.stop();
+                }
+                if (pzLinks.maxPunkteVergleichen()) {
+                    pframe.getLabelGewinnermeldung().setText("KI gewinnt!");
+                    pframe.labelGewinnermeldung.setVisible(true);
+                    thread.stop();
+                }
+
             }
             //MULTIPLAYER
             if (multiplayer) {
@@ -193,6 +199,17 @@ public class PingPong extends JPanel implements Runnable, KeyListener {
                 }
                 if (kollisionPruefen(spieler2, ball)) {
                     ball.setxGeschw(-Ball.V);
+                }
+                
+                if (pzRechts.maxPunkteVergleichen()) {
+                    pframe.getLabelGewinnermeldung().setText("Spieler 1 gewinnt!");
+                    pframe.labelGewinnermeldung.setVisible(true);
+                    thread.stop();
+                }
+                if (pzLinks.maxPunkteVergleichen()) {
+                    pframe.getLabelGewinnermeldung().setText("Spieler 2 gewinnt!");
+                    pframe.labelGewinnermeldung.setVisible(true);
+                    thread.stop();
                 }
             }
 
