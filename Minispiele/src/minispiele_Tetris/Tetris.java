@@ -32,7 +32,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     private boolean links, rechts, unten;
     private final int GRENZE_UNTEN = 600, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
     private Image img;
-    private LinkedList<TBaustein> alleBausteine;
+    private int[][] spielflaeche;
 
     public Tetris() {
         //Initialisiert die einzelnen Komponenten
@@ -41,7 +41,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
         links = false;
         rechts = false;
-        alleBausteine = new LinkedList<>();
+        initialisiereSpielflaeche();
         try {
             img = ImageIO.read(new File("D:\\Eigene Dokumente\\NetBeansProjects\\minispiele\\Minispiele\\src\\images\\Tetris_img\\TetrisFeld.jpg"));
 
@@ -63,18 +63,39 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
 
     }
 
+    private void initialisiereSpielflaeche() {
+        spielflaeche = new int[14][26];
+        for (int i = 0; i < spielflaeche.length; i++) {
+            for (int j = 0; j < spielflaeche[i].length; j++) {
+                spielflaeche[i][j] = -1;
+                // -1 = kein BausteinBlock befindet sich an dieser Position
+            }
+
+        }
+
+    }
+
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         gr.drawImage(img, 0, 0, this);
         block.paintComponent(gr);
+        for (int i = 0; i < spielflaeche.length; i++) {
+            for (int j = 0; j < spielflaeche[i].length; j++) {
+                if (spielflaeche[i][j] != -1) {
+                    gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), (j * 30), this);
+                }
+            }
+
+        }
 
     }
 
     @Override
     public void run() {
-        TBaustein stein;
+        int wartezeit = 70;
         while (true) {
+            wartezeit = 70;
 
             if (links) {
                 block.moveBlockLeft(GRENZE_LINKS);
@@ -84,17 +105,51 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             }
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
+                wartezeit = 40;
             }
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
+
+            int x1 = ((block.getX() / 30) - 1);
+            int y1 = (((block.getY() / 30) - 1) + block.getYmax());
+            y1--;
+            int x2, y2;
+            int verweis = block.getYmax()-1;
+            int[] xZeile = block.getBlockForm()[verweis];
+            for (int i = 0; i < xZeile.length; i++) {
+                x2 = x1 + i;
+                if (xZeile[i] == 0) {
+                    if (spielflaeche[x2][y1] != -1) {
+                        isUnten = true;
+                    }
+                }
+                if (xZeile[i] == 1) {
+                    y2 = y1 + 1;
+                    if (spielflaeche[x2][y2] != -1) {
+                        isUnten = true;
+                    }
+                }
+
+            }
+
             if (isUnten) {
-                stein = block;
-                alleBausteine.add(stein);
+                for (int i = 0; i < block.getBlockForm().length; i++) {
+                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                        if (block.getBlockForm()[i][j] == 1) {
+                            int x = (((block.getX() / 30) + i));
+                            int y = (((block.getY() / 30) + j) - 1);
+
+                            spielflaeche[x][y] = block.getID();
+                        }
+
+                    }
+
+                }
                 block = new TBaustein(-1);
             }
 
             repaint();
             try {
-                Thread.sleep(70);
+                Thread.sleep(wartezeit);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
