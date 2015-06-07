@@ -23,13 +23,11 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
             HEIGHT_FIELD = 750,
             TREFFER_RECHTS = 1,
             TREFFER_LINKS = -1;
-
+    //Steuerungsvariablen
     private int HOCH_SPIELER1,
             RUNTER_SPIELER1,
             HOCH_SPIELER2,
-            RUNTER_SPIELER2,
-            schwierigkeit = 15,
-            maxPunkte;
+            RUNTER_SPIELER2;
 
     private boolean up1, down1, up2, down2, multiplayer, solo;
 
@@ -40,8 +38,6 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
     private Punktezaehler pzRechts, pzLinks;
 
     private JFrame ppFrame;
-    private JLayeredPane layers;
-
     private Thread thread;
 
     /**
@@ -75,7 +71,6 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
      *
      * @param spieler1
      * @param ki
-     * @param schwierigkeit 10 = schwer 50 = leicht;
      */
     public PingPong(Spieler spieler1, KI ki) {
 
@@ -193,7 +188,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
             }
             //MULTIPLAYER
-            if (multiplayer) {
+            if(multiplayer){
                 if (kollisionPruefen(spieler1, ball)) {
                     ball.setxGeschw(Ball.V);
                 }

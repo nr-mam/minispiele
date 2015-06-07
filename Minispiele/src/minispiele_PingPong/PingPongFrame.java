@@ -5,6 +5,7 @@
  */
 package minispiele_PingPong;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,20 +20,23 @@ import static minispiele_PingPong.PingPong.WIDTH_FIELD;
  */
 public class PingPongFrame extends javax.swing.JFrame {
 
-    private String title;
-    private Component comp;
-    private Ball ball;
+    private final String title;
+    private final Component comp;
+    private final Ball ball;
 
     /**
      * Creates new form PingPongFrame
+     * @param title
+     * @param comp
+     * @param ball
      */
     public PingPongFrame(String title, Component comp, Ball ball) {
         initComponents();
-        //Gewinnermeldung.setLocationRelativeTo(null);
+        
         this.ball = ball;
         this.title = title;
         this.comp = comp;
-        
+        labelGewinnermeldung.setBackground(new Color(153, 153, 153, 100));
         labelGewinnermeldung.setVisible(false);
 
         layers.add(comp);
@@ -53,10 +57,18 @@ public class PingPongFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         layers = new javax.swing.JLayeredPane();
+        labelGewinnermeldung = new javax.swing.JLabel();
         tfPunkteLinks = new javax.swing.JTextField();
         tfPunkteRechts = new javax.swing.JTextField();
-        labelGewinnermeldung = new javax.swing.JLabel();
         labelHintergrund = new javax.swing.JLabel();
+
+        labelGewinnermeldung.setBackground(new Color(153,153,153,100));
+        labelGewinnermeldung.setFont(new java.awt.Font("SF Movie Poster", 2, 48)); // NOI18N
+        labelGewinnermeldung.setForeground(new java.awt.Color(255, 0, 0));
+        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGewinnermeldung.setOpaque(true);
+        layers.add(labelGewinnermeldung);
+        labelGewinnermeldung.setBounds(0, 0, 1200, 750);
 
         tfPunkteLinks.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         tfPunkteLinks.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -72,13 +84,7 @@ public class PingPongFrame extends javax.swing.JFrame {
         layers.add(tfPunkteRechts);
         tfPunkteRechts.setBounds(620, 10, 110, 60);
 
-        labelGewinnermeldung.setBackground(new java.awt.Color(255, 255, 255));
-        labelGewinnermeldung.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        labelGewinnermeldung.setForeground(new java.awt.Color(255, 0, 0));
-        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        layers.add(labelGewinnermeldung);
-        labelGewinnermeldung.setBounds(350, 310, 500, 110);
-
+        labelHintergrund.setBackground(new java.awt.Color(255, 0, 0));
         labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPongFeld.jpg"))); // NOI18N
         layers.add(labelHintergrund);
         labelHintergrund.setBounds(0, 0, 1200, 750);

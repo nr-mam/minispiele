@@ -303,7 +303,7 @@ public class Einstellungen extends javax.swing.JFrame {
     private void losButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losButtonActionPerformed
         setVisible(false);
         if (solo) {
-            new PingPong(new Spieler(100, Color.ORANGE), new KI(1100, Color.RED, SCHWER));
+            new PingPong(new Spieler(100, Color.ORANGE), new KI(1100, Color.RED, LEICHT));
         } else {
             new PingPong(new Spieler(100, Color.WHITE), new Spieler(1100, Color.RED));
         }
