@@ -33,6 +33,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private SnakeKopf head = new SnakeKopf();
     private int tempo;
     private boolean left, right, up, down;
+    public boolean gameover = false;
     //TODO
 
     public Snake() {
@@ -54,7 +55,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         setOpaque(false);
         setFocusable(true);
         addKeyListener(this);
-        new Thread().start();
+        new Thread(this).start();
         
 
     }
@@ -69,13 +70,13 @@ public class Snake extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void run() {
+        setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
         while (true) {
             speed = vStart;
             if (head.isRIGHT()) {
-                System.out.println("rechts");
-                //head.moveHeadRight();
+                head.moveHeadRight();
             }
             if (head.isDOWN()) {
                 head.moveHeadDown();
@@ -93,14 +94,22 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
+            if (gameover == true){
+                break;
+            }
 
         }
+        
     }
 
-    static void gameOver() {
-        //TODO
-        System.out.println("Spiel verloren");
+    public void setGameover(boolean gameover) {
+        this.gameover = gameover;
     }
+    
+    
+    
+
+    
 
     @Override
     public void keyTyped(KeyEvent e) {

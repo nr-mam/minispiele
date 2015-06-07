@@ -25,8 +25,8 @@ public class SnakeKopf extends JComponent{
     private int MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP;
     private int movingDirection;
     private boolean LEFT = false, RIGHT = false, UP = false, DOWN = false;
-    public int xCoordinate = (int) (Math.random()*(Snake.WIDTH_FIELD-5)),
-            yCoordinate = (int) (Math.random()*(Snake.HEIGHT_FIELD-5));
+    public int xCoordinate =  10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10)),
+            yCoordinate = 10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
     public Snake snake;
 
     public SnakeKopf() {
@@ -102,41 +102,40 @@ public class SnakeKopf extends JComponent{
     }
 
     public void moveHeadUp() {
-        if (yCoordinate + 10 > 20) {
-            yCoordinate += 10;
+        
+        if (yCoordinate - 10 > 0) {
+            yCoordinate -= 10;
         } else {
-            Snake.gameOver();
+            snake.setGameover(true);
         }
 
     }
 
     public void moveHeadDown() {
-        yCoordinate -=10;
-        /*if (yCoordinate - 10 > snake.getHeight() - 20) {
-            yCoordinate -= 10;
+        if (yCoordinate + 10 < snake.HEIGHT_FIELD+10) {
+            yCoordinate += 10;
         } else {
-            Snake.gameOver();
+            snake.setGameover(true);
         }
-                */
+        
+                
 
     }
 
     public void moveHeadLeft() {
-        xCoordinate-=10;
-    //    if (xCoordinate - 10 > 20) {
-    //        xCoordinate -= 10;
-    //    } else {
-    //        Snake.gameOver();
-    //    }
+        if (xCoordinate - 10 > 0) {
+            xCoordinate -= 10;
+        } else {
+            snake.setGameover(true);;
+        }
     }
 
     public void moveHeadRight() {
-        xCoordinate +=10;
-    //    if (xCoordinate + 10 > snake.getWidth() - 20) {
-    //        xCoordinate += 10;
-    //    } else {
-    //        Snake.gameOver();
-    //    }
+        if (xCoordinate + 10 < snake.WIDTH_FIELD +10) {
+            xCoordinate += 10;
+        } else {
+            snake.setGameover(true);
+        }
 
     }
 
