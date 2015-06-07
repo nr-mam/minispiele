@@ -95,66 +95,77 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     @Override
     public void run() {
         int wartezeit;
-        int x, y;
+        int x, y, y1;
         int[] geprüft;
         boolean isOK;
         while (true) {
             isOK = true;
             wartezeit = 70;
-            geprüft = new int[block.getBlockForm()[0].length];
-            for (int i = 0; i < geprüft.length; i++) {
-                geprüft[i] = 0;
-            }
-
-            if (links) {
-                
-                for (int i =  0; i < block.getBlockForm().length; i++) {
-                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + j) - 1);
-                        y = (((block.getY() / 30) + i) - 1);
-                        if (block.getBlockForm()[i][j] == 0 && geprüft[j] == 0) {
-                            geprüft[j] = 1;
-                            if (spielflaeche[x][y] != -1) {
-                                isOK = false;
-                            }
-                        }
-
-                    }
-                    
-                }
-                if(isOK){
-                block.moveBlockLeft(GRENZE_LINKS);
-                }
-
-            }
-            if (rechts) {
-                isOK = true;                
-                for (int i =  0; i < block.getBlockForm().length; i++) {
-                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + j) + 1);
-                        y = (((block.getY() / 30) + i) - 1);
-                        if (block.getBlockForm()[i][j] == 0 && geprüft[j] == 0) {
-                            geprüft[j] = 1;
-                            if (spielflaeche[x][y] != -1) {
-                                isOK = false;
-                            }
-                        }
-
-                    }
-                    
-                }
-                if(isOK){
-                block.moveBlockRight(GRENZE_RECHTS);
-                }
-            }
+            
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
                 wartezeit = 40;
             }
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
+
+
+            if (links) {
+
+                for (int i = 0; i < block.getBlockForm().length; i++) {
+                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                        x = (((block.getX() / 30) + j) - 1);
+                        y = (((block.getY() / 30) + i) - 1);
+                        if (block.getBlockForm()[i][j] == 0) {
+                            if (spielflaeche[x][y] != -1) {
+                                isOK = false;
+                            }
+                            if (block.getBlockForm()[i][j] == 1) {
+                                y1 = x - 1;
+                                if (spielflaeche[y1][y] != -1) {
+                                    isOK = false;
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                if (isOK) {
+                    block.moveBlockLeft(GRENZE_LINKS);
+                    repaint();
+                }
+
+            }
+            if (rechts) {
+                isOK = true;
+                for (int i = 0; i < block.getBlockForm().length; i++) {
+                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                        x = (((block.getX() / 30) + j)- 1);
+                        y = (((block.getY() / 30) + i));
+                        if (block.getBlockForm()[i][j] == 0) {                           
+                            if (spielflaeche[x][y] != -1) {
+                                isOK = false;
+                            }
+                        }
+                        if (block.getBlockForm()[i][j] == 1) {
+                            y1 = x + 1;
+                            if (spielflaeche[y1][y] != -1) {
+                                isOK = false;
+                            }
+                        }
+
+                    }
+
+                }
+                if (isOK) {
+                    block.moveBlockRight(GRENZE_RECHTS);
+                    repaint();
+                }
+            }
+            
             //boolean isUnten = false;
 
-            int y1;
             geprüft = new int[block.getBlockForm()[0].length];
             for (int i = 0; i < geprüft.length; i++) {
                 geprüft[i] = 0;
@@ -185,11 +196,11 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             if (isUnten) {
                 for (int i = 0; i < block.getBlockForm().length; i++) {
                     for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                        x = (((block.getX() / 30) + i));
+                        y = (((block.getY() / 30) + j) - 1);
                         if (block.getBlockForm()[i][j] == 1) {
-                            x = (((block.getX() / 30) + i));
-                            y = (((block.getY() / 30) + j) - 1);
-
                             spielflaeche[x][y] = block.getID();
+                            
                         }
 
                     }
