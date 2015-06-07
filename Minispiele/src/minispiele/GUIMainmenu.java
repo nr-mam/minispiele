@@ -6,6 +6,7 @@
 package minispiele;
 
 import minispiele_PingPong.Einstellungen;
+import minispiele_Snake.Snake;
 import minispiele_Tetris.Tetris;
 
 
@@ -57,6 +58,11 @@ public class GUIMainmenu extends javax.swing.JFrame {
         getContentPane().add(PingPongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 120, 50));
 
         jButtonSnake.setText("Snake");
+        jButtonSnake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSnakeActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 120, 50));
 
         jButton1.setText("Tetris");
@@ -84,6 +90,10 @@ public class GUIMainmenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new Tetris();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonSnakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSnakeActionPerformed
+        new Snake();
+    }//GEN-LAST:event_jButtonSnakeActionPerformed
 
     /**
      * @param args the command line arguments
