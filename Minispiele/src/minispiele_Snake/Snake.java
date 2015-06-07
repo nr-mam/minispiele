@@ -31,6 +31,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private int width, height;
     private int playingField[][];
     private SnakeKopf head = new SnakeKopf();
+    private Futter eat = new Futter();
     private int tempo;
     private boolean left, right, up, down;
     public boolean gameover = false;
@@ -65,6 +66,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         super.paintComponent(gr);
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
+        eat.paintComponent(gr);
 
     }
 
@@ -105,11 +107,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public void setGameover(boolean gameover) {
         this.gameover = gameover;
     }
-    
-    
-    
-
-    
 
     @Override
     public void keyTyped(KeyEvent e) {
