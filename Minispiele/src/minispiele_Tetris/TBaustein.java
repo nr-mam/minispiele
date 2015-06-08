@@ -25,10 +25,10 @@ public class TBaustein extends JComponent {
 
     private int xmax, ymax; // Die maximale Größe des Typs vom Block
     private int[][] blockForm; // Speichert die Form des jeweiligen Typs
-    private Image img; // Blockbild
+    Image img; // Blockbild
     private Image[] imgs; // Alle Blockbilderfarben
     private int ID; // Typ des Blocks
-    private int X, Y; // X-/ Y- Position des Blocks
+    int X, Y; // X-/ Y- Position des Blocks
     private int queue; // Wartezeit, bis der Block sich um eine Ebene bewegen soll
 
     TBaustein(int blockID) {

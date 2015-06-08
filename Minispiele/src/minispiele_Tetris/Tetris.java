@@ -28,9 +28,10 @@ import javax.swing.JPanel;
 public class Tetris extends JPanel implements Runnable, KeyListener {
 
     private TBaustein block = new TBaustein(-1);
+    private TBaustein blockTest;
     private int LINKS_BEWEGUNG, RECHTS_BEWEGUNG, UNTEN_BEWEGUNG;
     private boolean links, rechts, unten, stop;
-    private final int GRENZE_UNTEN = 600, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
+    private final int GRENZE_UNTEN = 570, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
     private Image img;
     private int[][] spielflaeche;
 
@@ -39,6 +40,9 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         LINKS_BEWEGUNG = KeyEvent.VK_LEFT;
         RECHTS_BEWEGUNG = KeyEvent.VK_RIGHT;
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
+        blockTest = new TBaustein(block.getID());
+        blockTest.img = blockTest.getImgs(1);
+        //blockTest.setVisible(false);
         links = false;
         rechts = false;
         stop = false;
@@ -65,7 +69,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     }
 
     private void initialisiereSpielflaeche() {
-        spielflaeche = new int[15][26];
+        spielflaeche = new int[16][26];
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
                 spielflaeche[i][j] = -1;
@@ -84,7 +88,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
                 if (spielflaeche[i][j] != -1) {
-                    gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), (j * 30), this);
+                    gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), ((j * 30) - 1), this);
                 }
             }
 
@@ -102,30 +106,29 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             isOK = true;
             wartezeit = 70;
             
+            //Pfeiltaste nach unten wurde gedrückt.            
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
                 wartezeit = 40;
             }
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
 
+            //Pfeiltaste nach links wurde gedrückt.
+            if (links) {                
 
-            if (links) {
-
-                for (int i = 0; i < block.getBlockForm().length; i++) {
-                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + j) - 1);
-                        y = (((block.getY() / 30) + i) - 1);
-                        if (block.getBlockForm()[i][j] == 0) {
+                if (block.getX()-30 > 0 ) {
+                blockTest.X = block.getX()-30;
+                }
+                
+                blockTest.Y = block.getY();
+                for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+                    for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                        x = (((blockTest.getX() / 30) + i));
+                        y = (((blockTest.getY() / 30) + j));
+                        if (blockTest.getBlockForm()[i][j] == 1) {
                             if (spielflaeche[x][y] != -1) {
                                 isOK = false;
                             }
-                            if (block.getBlockForm()[i][j] == 1) {
-                                y1 = x - 1;
-                                if (spielflaeche[y1][y] != -1) {
-                                    isOK = false;
-                                }
-                            }
-
                         }
 
                     }
@@ -133,38 +136,38 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
                 if (isOK) {
                     block.moveBlockLeft(GRENZE_LINKS);
-                    repaint();
                 }
 
             }
+            //Pfeiltaste nach rechts wurde gedrückt.
             if (rechts) {
+                blockTest.X = block.getX()+30;
+                blockTest.Y = block.getY();
                 isOK = true;
-                for (int i = 0; i < block.getBlockForm().length; i++) {
-                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + j)- 1);
-                        y = (((block.getY() / 30) + i));
-                        if (block.getBlockForm()[i][j] == 0) {                           
+                for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+                    for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                        x = (((blockTest.getX() / 30) + i));
+                        y = (((blockTest.getY() / 30) + j));
+                        if (blockTest.getBlockForm()[i][j] == 1) {                           
                             if (spielflaeche[x][y] != -1) {
                                 isOK = false;
                             }
                         }
-                        if (block.getBlockForm()[i][j] == 1) {
-                            y1 = x + 1;
-                            if (spielflaeche[y1][y] != -1) {
-                                isOK = false;
-                            }
-                        }
-
                     }
 
                 }
                 if (isOK) {
                     block.moveBlockRight(GRENZE_RECHTS);
-                    repaint();
                 }
             }
             
             //boolean isUnten = false;
+            
+                        
+            if (unten) {
+                block.moveBlockDown(GRENZE_UNTEN);
+                wartezeit = 40;
+            }
 
             geprüft = new int[block.getBlockForm()[0].length];
             for (int i = 0; i < geprüft.length; i++) {
@@ -174,7 +177,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
                 for (int j = 0; j < block.getBlockForm()[i].length; j++) {
                     x = (((block.getX() / 30) + i));
-                    y = (((block.getY() / 30) + j) - 1);
+                    y = (((block.getY() / 30) + j));
                     if (block.getBlockForm()[i][j] == 0 && geprüft[j] == 0) {
                         geprüft[j] = 1;
                         if (spielflaeche[x][y] != -1) {
@@ -197,7 +200,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 for (int i = 0; i < block.getBlockForm().length; i++) {
                     for (int j = 0; j < block.getBlockForm()[i].length; j++) {
                         x = (((block.getX() / 30) + i));
-                        y = (((block.getY() / 30) + j) - 1);
+                        y = (((block.getY() / 30) + j));
                         if (block.getBlockForm()[i][j] == 1) {
                             spielflaeche[x][y] = block.getID();
                             
@@ -207,6 +210,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
 
                 }
                 block = new TBaustein(-1);
+                blockTest = new TBaustein(block.getID());
             }
 
             repaint();
