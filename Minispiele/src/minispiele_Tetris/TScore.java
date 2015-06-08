@@ -5,7 +5,12 @@
  */
 package minispiele_Tetris;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
 /**
@@ -26,25 +31,36 @@ public class TScore extends JComponent {
 
     @Override
     public void paintComponent(Graphics gr) {
-        
         for (int i = 0; i < baustein1.getBlockForm().length; i++) {
             for (int j = 0; j < baustein1.getBlockForm()[i].length; j++) {
                 if (baustein1.getBlockForm()[i][j] == 1) {
-                    gr.drawImage(baustein1.img, ((i * 30)+515), ((j * 30)+ 175), this);
+                    gr.drawImage(baustein1.img, ((i * 30) + 515), ((j * 30) + 175), this);
                 }
             }
 
         }
-        score = 155;
-        gr.drawString(Integer.toString(score), 515, 171);
+        gr.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
+        gr.setColor(Color.WHITE);
+        int x = (Integer.toString(score).length()*10 + Integer.toString(score).length()*4);
+        gr.drawString(Integer.toString(score), (675-x), 400);
 
     }
     
-    public TBaustein neuerBaustein(){
-    TBaustein bausteinNext = baustein1;
-    baustein1 = baustein2;
-    baustein2 = new TBaustein(-1);
-    return bausteinNext;
+    public void ScoreAdd(int a){
+        score = score + a;
+    
+    }
+    
+    public void LinesAdd(int a){
+        lines = lines + a;
+    
+    }
+
+    public TBaustein neuerBaustein() {
+        TBaustein bausteinNext = baustein1;
+        baustein1 = baustein2;
+        baustein2 = new TBaustein(-1);
+        return bausteinNext;
     }
 
 }
