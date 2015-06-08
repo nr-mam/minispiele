@@ -5,10 +5,22 @@
  */
 package minispiele_Snake;
 
+import java.awt.Image;
+import java.util.LinkedList;
+import javax.swing.JComponent;
+
 /**
  *
- * @author Windows7
+ * @author nmamerow
  */
-public class SnakeTail {
+public class SnakeTail extends JComponent{
+    private Image imgTail;
+    LinkedList<Tail> tail = new LinkedList<>();
+
+    public SnakeTail() {
+        
+    }
+    
+    
     
 }

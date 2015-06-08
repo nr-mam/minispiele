@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -16,7 +17,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author Windows7
+ * @author nmamerow
  */
 public class SnakeKopf extends JComponent{
 
@@ -28,6 +29,8 @@ public class SnakeKopf extends JComponent{
     public int xCoordinate =  10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10)),
             yCoordinate = 10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
     public Snake snake;
+    public LinkedList<Tail> tail = new LinkedList<>();
+    public int previousxCoordinate, previousyCoordinate; 
 
     public SnakeKopf() {
         try {
@@ -83,6 +86,7 @@ public class SnakeKopf extends JComponent{
             UP = true;
             DOWN = false;
         }
+        
     }
 
     public boolean isLEFT() {
@@ -102,7 +106,7 @@ public class SnakeKopf extends JComponent{
     }
 
     public void moveHeadUp() {
-        
+        previousyCoordinate = yCoordinate;
         if (yCoordinate - 10 > 0) {
             yCoordinate -= 10;
         } else {
@@ -112,6 +116,7 @@ public class SnakeKopf extends JComponent{
     }
 
     public void moveHeadDown() {
+        previousyCoordinate = yCoordinate;
         if (yCoordinate + 10 < snake.HEIGHT_FIELD+10) {
             yCoordinate += 10;
         } else {
@@ -123,6 +128,7 @@ public class SnakeKopf extends JComponent{
     }
 
     public void moveHeadLeft() {
+        previousxCoordinate = xCoordinate;
         if (xCoordinate - 10 > 0) {
             xCoordinate -= 10;
         } else {
@@ -131,6 +137,7 @@ public class SnakeKopf extends JComponent{
     }
 
     public void moveHeadRight() {
+        previousxCoordinate = xCoordinate;
         if (xCoordinate + 10 < snake.WIDTH_FIELD +10) {
             xCoordinate += 10;
         } else {
@@ -163,6 +170,12 @@ public class SnakeKopf extends JComponent{
     public void setDOWN(boolean DOWN) {
         this.DOWN = DOWN;
     }
-    
+    public void tailAdd(){
+        Tail t = new Tail();
+        t.setxCoordinate(previousxCoordinate);
+        t.setyCoordinate(previousyCoordinate);
+        tail.add(t);
+        
+    }
 
 }

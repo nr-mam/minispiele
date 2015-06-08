@@ -99,6 +99,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (gameover == true){
                 break;
             }
+            head.tailAdd();
 
         }
         

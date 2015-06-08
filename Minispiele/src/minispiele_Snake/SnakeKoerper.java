@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author Windows7
+ * @author nmamerow
  */
 public class SnakeKoerper extends JComponent {
 
