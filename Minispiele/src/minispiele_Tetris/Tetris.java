@@ -35,6 +35,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     private final int GRENZE_UNTEN = 570, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
     private Image img;
     private int[][] spielflaeche;
+    private TScore scores;
 
     public Tetris() {
         //Initialisiert die einzelnen Komponenten
@@ -42,6 +43,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         RECHTS_BEWEGUNG = KeyEvent.VK_RIGHT;
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
         blockTest = new TBaustein(block.getID());
+        scores = new TScore(new TBaustein(-1), new TBaustein(-1));
         //blockTest.setVisible(false);
         links = false;
         rechts = false;
@@ -94,6 +96,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         gr.drawImage(img, 0, 0, this);
+        scores.paintComponent(gr);
         block.paintComponent(gr);
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
@@ -229,7 +232,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                     }
 
                 }
-                block = new TBaustein(-1);
+                block = scores.neuerBaustein();
                 blockTest = new TBaustein(block.getID());
             }
 
