@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -41,31 +42,24 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         RECHTS_BEWEGUNG = KeyEvent.VK_RIGHT;
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
         blockTest = new TBaustein(block.getID());
-        blockTest.img = blockTest.getImgs(1);
         //blockTest.setVisible(false);
         links = false;
         rechts = false;
         stop = false;
         initialisiereSpielflaeche();
         try {
-            img = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\TetrisFeld.jpg"));
+            System.out.println("dd");
+            img = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\TetrisFeld_Design_01.jpg"));
+            System.out.println("ddd");
 
         } catch (IOException ex) {
             Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //Erstellt die GUI
-        JFrame frame = new JFrame();
-        frame.setMinimumSize(new Dimension(img.getWidth(this) + 6, img.getHeight(this) + 26));
-        frame.setLocationRelativeTo(null);
-        frame.add(this);
-        frame.setVisible(true);
-        frame.setResizable(false);
-        setOpaque(false);
-        setFocusable(true);
-        addKeyListener(this);
-        new Thread(this).start();
-
+        try {      
+            GUI();
+        } catch (IOException ex) {
+            Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void initialisiereSpielflaeche() {
@@ -79,6 +73,22 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         }
 
     }
+    
+    private void GUI() throws IOException {
+        //Erstellt die GUI
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(img.getWidth(this) + 6, img.getHeight(this) + 26));
+        frame.setLocationRelativeTo(null);
+        frame.add(this);
+        frame.setVisible(true);
+        frame.setResizable(false);
+        setOpaque(false);
+        setFocusable(true);
+        addKeyListener(this);
+        new Thread(this).start();
+
+    }
+    
 
     @Override
     public void paintComponent(Graphics gr) {
@@ -136,6 +146,11 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
                 if (isOK) {
                     block.moveBlockLeft(GRENZE_LINKS);
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             }
@@ -158,6 +173,11 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
                 if (isOK) {
                     block.moveBlockRight(GRENZE_RECHTS);
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             
