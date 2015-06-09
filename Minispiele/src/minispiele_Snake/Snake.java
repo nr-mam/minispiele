@@ -35,6 +35,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private int tempo;
     private boolean left, right, up, down;
     public boolean gameover = false;
+    public Tail tail;
     //TODO
 
     public Snake() {
@@ -67,7 +68,9 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-
+        if(head.getTaillengt()>0){
+        //    tail.paintComponent(gr);
+        }
     }
 
     @Override

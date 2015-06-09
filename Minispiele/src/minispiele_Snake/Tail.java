@@ -20,22 +20,19 @@ public class Tail extends JComponent {
     public int xCoordinate, yCoordinate;
     public Image imgTail;
 
-    public Tail() {
+    public Tail(int x, int y) {
+        xCoordinate = x;
+        yCoordinate = y;
         try {
             imgTail = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFragment.jpg"));
 
         } catch (IOException ex) {
             System.out.println("Image not found.");
         }
+        
     }
 
-    public void setxCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
-    }
-
-    public void setyCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
-    }
+   
 
     public int getxCoordinate() {
         return xCoordinate;

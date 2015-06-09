@@ -31,6 +31,7 @@ public class SnakeKopf extends JComponent{
     public Snake snake;
     public LinkedList<Tail> tail = new LinkedList<>();
     public int previousxCoordinate, previousyCoordinate; 
+    public int taillengt = 0;
 
     public SnakeKopf() {
         try {
@@ -171,11 +172,15 @@ public class SnakeKopf extends JComponent{
         this.DOWN = DOWN;
     }
     public void tailAdd(){
-        Tail t = new Tail();
-        t.setxCoordinate(previousxCoordinate);
-        t.setyCoordinate(previousyCoordinate);
+        Tail t = new Tail(previousxCoordinate,previousyCoordinate);
         tail.add(t);
+        taillengt++;
         
     }
+
+    public int getTaillengt() {
+        return taillengt;
+    }
+    
 
 }
