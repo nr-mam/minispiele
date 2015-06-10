@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,8 @@ public class TBaustein extends JComponent {
 
     private int xmax, ymax; // Die maximale Größe des Typs vom Block
     private int[][] blockForm; // Speichert die Form des jeweiligen Typs
+    private ArrayList<int[][]> blockFormRotation; // Speichert alle Rotationsmöglichkeiten eines Bausteines
+    private int currentBlockForm;
     Image img; // Blockbild
     private Image[] imgs; // Alle Blockbilderfarben
     private int ID; // Typ des Blocks
@@ -32,6 +35,8 @@ public class TBaustein extends JComponent {
     private int queue; // Wartezeit, bis der Block sich um eine Ebene bewegen soll
 
     TBaustein(int blockID) {
+        blockFormRotation = new ArrayList<>(4);
+        currentBlockForm = 0;
         X = 180;
         Y = 30;
         //X=30;
@@ -66,39 +71,59 @@ public class TBaustein extends JComponent {
 
         if (ID == 0) {
             blockForm = new int[][]{{1}, {1}, {1}, {1}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{1, 1, 1, 1}});
             img = imgs[0];
         }
 
         if (ID == 1) {
             blockForm = new int[][]{{1, 1, 1}, {0, 1, 0}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{0, 1, 0}, {1, 1, 1}});
+            blockFormRotation.add(new int[][]{{0, 1}, {1, 1}, {0, 1}});
+            blockFormRotation.add(new int[][]{{1, 0}, {1, 1}, {1, 0}});
             img = imgs[1];
         }
 
         if (ID == 2) {
             blockForm = new int[][]{{1, 1}, {1, 1}};
+            blockFormRotation.add(blockForm);
             img = imgs[2];
         }
 
         if (ID == 3) {
-            blockForm = new int[][]{{1,0},{1,0},{1,1}};
+            blockForm = new int[][]{{1, 0}, {1, 0}, {1, 1}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{0, 0, 1}, {1, 1, 1}});
+            blockFormRotation.add(new int[][]{{1, 1}, {0, 1}, {0, 1}});
+            blockFormRotation.add(new int[][]{{1, 1, 1}, {1, 0, 0}});
+
             img = imgs[3];
         }
 
         if (ID == 4) {
-            blockForm = new int[][]{{1,1},{1,0},{1,0}};
+            blockForm = new int[][]{{1, 1}, {1, 0}, {1, 0}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{1, 0, 0}, {1, 1, 1}});
+            blockFormRotation.add(new int[][]{{0, 1}, {0, 1}, {1, 1}});
+            blockFormRotation.add(new int[][]{{1, 1, 1}, {0, 0, 1}});
             img = imgs[4];
         }
 
         if (ID == 5) {
             blockForm = new int[][]{{0, 1, 1}, {1, 1, 0}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{1, 0}, {1, 1}, {0, 1}});
+
             img = imgs[5];
         }
 
         if (ID == 6) {
             blockForm = new int[][]{{1, 1, 0}, {0, 1, 1}};
+            blockFormRotation.add(blockForm);
+            blockFormRotation.add(new int[][]{{0, 1}, {1, 1}, {1, 0}});
             img = imgs[6];
         }
-
         ymax = blockForm.length;
         xmax = blockForm[ymax - 1].length;
 
@@ -115,6 +140,25 @@ public class TBaustein extends JComponent {
 
             }
 
+        }
+
+    }
+
+    public void RotateBlock() {
+        if (blockFormRotation.size() == currentBlockForm + 1) {
+            blockForm = blockFormRotation.get(0);
+            currentBlockForm = 0;
+        } else {
+            currentBlockForm++;
+        blockForm = blockFormRotation.get(currentBlockForm);
+        }
+        
+        ymax = blockForm.length;
+        xmax = blockForm[ymax - 1].length;
+        try {
+            Thread.sleep(15);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TBaustein.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -166,8 +210,6 @@ public class TBaustein extends JComponent {
         if (queue > 5) {
             Y += 30;
             queue = 0;
-        } else {
-
         }
         if (grenze == (Y + (30 * (xmax - 2)))) {
             return true;

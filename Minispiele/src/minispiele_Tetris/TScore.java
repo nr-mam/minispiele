@@ -43,6 +43,8 @@ public class TScore extends JComponent {
         gr.setColor(Color.WHITE);
         int x = (Integer.toString(score).length()*10 + Integer.toString(score).length()*4);
         gr.drawString(Integer.toString(score), (675-x), 400);
+        x = (Integer.toString(lines).length()*10 + Integer.toString(lines).length()*4);
+        gr.drawString(Integer.toString(lines), (675-x), 467);
 
     }
     
