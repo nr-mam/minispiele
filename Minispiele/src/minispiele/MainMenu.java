@@ -21,6 +21,9 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        setLocationRelativeTo(null);
+        setResizable(false);
+
     }
 
     /**
@@ -97,10 +100,10 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseEntered
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-                
+
         Einstellungen einstellungen = new Einstellungen();
         einstellungen.setVisible(true);
-        
+
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -108,7 +111,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        
+
         new Tetris();
     }//GEN-LAST:event_jLabel4MousePressed
 
@@ -119,15 +122,18 @@ public class MainMenu extends javax.swing.JFrame {
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }//GEN-LAST:event_jLabel2MouseExited
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {                                    
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {                                    
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {                                    
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }
+
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
     }
