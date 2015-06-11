@@ -214,7 +214,6 @@ public class TBaustein extends JComponent {
         if (grenze == (Y + (30 * (xmax - 2)))) {
             return true;
         }
-
         return false;
     }
 

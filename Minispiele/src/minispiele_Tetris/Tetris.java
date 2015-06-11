@@ -95,11 +95,11 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         gr.drawImage(img, 0, 0, this);
-
+        //blockTest.paintComponent(gr);
         block.paintComponent(gr);
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
-                if (spielflaeche[i][j] != -1) {
+                if (spielflaeche[i][j] != -1 && start) {
                     gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), ((j * 30) - 1), this);
                 }
             }
@@ -112,7 +112,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     @Override
     public void run() {
         int wartezeit;
-        int x, y, y1;
+        int x = 0, y = 0, y1;
         int[] geprüft;
         boolean isOK;
         boolean isLine;
@@ -123,7 +123,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             scores.ScoreAdd(1);
 
             //Pfeiltaste nach unten wurde gedrückt.
-            if(rotieren){
+            if (rotieren) {
                 block.RotateBlock();
                 blockTest.RotateBlock();
             }
@@ -131,67 +131,10 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 block.moveBlockDown(GRENZE_UNTEN);
                 wartezeit = 40;
             }
+
+            linksTesten(x, y, isOK);
+            rechtsTesten(x, y, isOK);
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
-
-            //Pfeiltaste nach links wurde gedrückt.
-            if (links) {
-
-                if (block.getX() - 30 > 0) {
-                    blockTest.X = block.getX() - 30;
-                }
-
-                blockTest.Y = block.getY();
-                for (int i = 0; i < blockTest.getBlockForm().length; i++) {
-                    for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
-                        x = (((blockTest.getX() / 30) + i));
-                        y = (((blockTest.getY() / 30) + j));
-                        if (blockTest.getBlockForm()[i][j] == 1) {
-                            if (spielflaeche[x][y] != -1) {
-                                isOK = false;
-                            }
-                        }
-
-                    }
-
-                }
-                if (isOK) {
-                    block.moveBlockLeft(GRENZE_LINKS);
-                    try {
-                        Thread.sleep(15);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-            }
-
-            //Pfeiltaste nach rechts wurde gedrückt.
-            if (rechts) {
-                blockTest.X = block.getX() + 30;
-                blockTest.Y = block.getY();
-                isOK = true;
-                for (int i = 0; i < blockTest.getBlockForm().length; i++) {
-                    for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
-                        x = (((blockTest.getX() / 30) + i));
-                        y = (((blockTest.getY() / 30) + j));
-                        if (blockTest.getBlockForm()[i][j] == 1) {
-                            if (spielflaeche[x][y] != -1) {
-                                isOK = false;
-                            }
-                        }
-                    }
-
-                }
-                if (isOK) {
-                    block.moveBlockRight(GRENZE_RECHTS);
-                    try {
-                        Thread.sleep(15);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-            
             //Pfeiltaste nach unten wurde gedrückt.
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
@@ -229,14 +172,18 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
 
             if (isUnten) {
                 x = ((block.getY() / 30));
-                if(x <= 2){
-                start = false;
-                break;
+                if (x < 2) {
+                    start = false;
+                    break;
+                }
+
+                for (int i = 0; i < geprüft.length; i++) {
+                    geprüft[i] = 0;
                 }
                 for (int i = 0; i < block.getBlockForm().length; i++) {
                     for (int j = 0; j < block.getBlockForm()[i].length; j++) {
                         x = (((block.getX() / 30) + i));
-                        y = (((block.getY() / 30) + j));                        
+                        y = (((block.getY() / 30) + j));
                         if (block.getBlockForm()[i][j] == 1) {
                             spielflaeche[x][y] = block.getID();
 
@@ -260,6 +207,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                             if (c == 12) {
 
                                 scores.LinesAdd(1);
+                                scores.ScoreAdd(200);
 
                                 spielflaecheKopie = new int[spielflaeche.length][spielflaeche[0].length];
                                 for (int k = 0; k < spielflaeche.length; k++) {
@@ -297,10 +245,75 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             }
         }
         String end = "GAME OVER";
-                JOptionPane.showMessageDialog(null, end, "Tetris",
-                        JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, end, "Tetris",
+                JOptionPane.INFORMATION_MESSAGE);
 
-        
+    }
+
+    private void linksTesten(int x, int y, boolean isOK) {
+
+        //Pfeiltaste nach links wurde gedrückt.
+        if (links) {
+
+            if (block.getX() - 30 > 0) {
+                blockTest.X = block.getX() - 30;
+            }
+
+            blockTest.Y = block.getY();
+            for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+                for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                    x = (((blockTest.getX() / 30) + i));
+                    y = (((blockTest.getY() / 30) + j));
+                    if (blockTest.getBlockForm()[i][j] == 1) {
+                        if (spielflaeche[x][y] != -1) {
+                            isOK = false;
+                        }
+                    }
+
+                }
+
+            }
+            if (isOK) {
+                block.moveBlockLeft(GRENZE_LINKS);
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+
+    }
+
+    private void rechtsTesten(int x, int y, boolean isOK) {
+        //Pfeiltaste nach rechts wurde gedrückt.
+        if (rechts) {
+            blockTest.X = block.getX() + 30;
+            blockTest.Y = block.getY();
+            isOK = true;
+            for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+                for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                    x = (((blockTest.getX() / 30) + i));
+                    y = (((blockTest.getY() / 30) + j));
+                    if (blockTest.getBlockForm()[i][j] == 1) {
+                        if (spielflaeche[x][y] != -1) {
+                            isOK = false;
+                        }
+                    }
+                }
+
+            }
+            if (isOK) {
+                block.moveBlockRight(GRENZE_RECHTS);
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
 
     @Override
