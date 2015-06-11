@@ -6,7 +6,6 @@
 package minispiele_PingPong;
 
 import java.awt.Color;
-import minispiele.GUIMainmenu;
 
 /**
  *
