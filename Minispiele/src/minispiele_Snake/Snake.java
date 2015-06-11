@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -36,10 +37,12 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private boolean left, right, up, down;
     public boolean gameover = false;
     public Tail tail;
+    public LinkedList<Tail> taillist = new LinkedList<>();
+    public int score = 0;
     //TODO
 
     public Snake() {
-        
+
         try {
             imgField = ImageIO.read(this.getClass().getResource("..\\images\\SnakeSpielfeld.jpg"));
 
@@ -58,7 +61,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
         addKeyListener(this);
         new Thread(this).start();
-        
 
     }
 
@@ -68,8 +70,8 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        if(head.getTaillengt()>0){
-        //    tail.paintComponent(gr);
+        for (Tail tail : taillist) {
+            tail.paintComponent(gr);
         }
     }
 
@@ -79,6 +81,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         int speed = vStart;
         head.setRIGHT(true);
         while (true) {
+            tail = new Tail(head.getxCoordinate(), head.getyCoordinate());
             speed = vStart;
             if (head.isRIGHT()) {
                 head.moveHeadRight();
@@ -92,6 +95,10 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (head.isUP()) {
                 head.moveHeadUp();
             }
+            if (head.getxCoordinate() == eat.getxCoordinate()
+                    && head.getyCoordinate() == eat.getyCoordinate()) {
+                score();
+            }
 
             repaint();
             try {
@@ -99,13 +106,13 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (gameover == true){
+            if (gameover == true) {
                 break;
             }
             head.tailAdd();
 
         }
-        
+
     }
 
     public void setGameover(boolean gameover) {
@@ -126,6 +133,12 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    private void score() {
+        score++;
+        eat.position();
+        
     }
 
 }

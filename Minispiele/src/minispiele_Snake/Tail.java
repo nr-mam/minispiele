@@ -29,6 +29,7 @@ public class Tail extends JComponent {
         } catch (IOException ex) {
             System.out.println("Image not found.");
         }
+        imgTail = this.imgTail;
         
     }
 
@@ -43,6 +44,7 @@ public class Tail extends JComponent {
     }
 
     public void paintComponent(Graphics gr) {
+        super.paintComponent(gr);
         gr.drawImage(imgTail, xCoordinate, yCoordinate, this);
 
     }

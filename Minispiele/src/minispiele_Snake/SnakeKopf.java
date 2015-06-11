@@ -181,6 +181,15 @@ public class SnakeKopf extends JComponent{
     public int getTaillengt() {
         return taillengt;
     }
+
+    public int getxCoordinate() {
+        return xCoordinate;
+    }
+
+    public int getyCoordinate() {
+        return yCoordinate;
+    }
+    
     
 
 }

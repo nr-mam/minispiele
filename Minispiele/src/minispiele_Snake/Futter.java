@@ -43,4 +43,13 @@ public class Futter extends JComponent {
 
     }
 
+    public int getxCoordinate() {
+        return xCoordinate;
+    }
+
+    public int getyCoordinate() {
+        return yCoordinate;
+    }
+    
+
 }
