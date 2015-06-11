@@ -27,8 +27,7 @@ public class KI extends Spieler {
         this.x = x;
         HOEHE_SPIELER = 150;
         BREITE_SPIELER = 20;
-        y = 150;
-        
+        y = 200;
 
         this.schwierigkeit = schwierigkeit;
         this.color = color;
@@ -38,27 +37,27 @@ public class KI extends Spieler {
     private void moveUp() {
         Random r = new Random();
         int gewichtung = 0;
-        gewichtung = r.nextInt(schwierigkeit);
+        gewichtung = r.nextInt(schwierigkeit - 5);
         y += 7 - gewichtung;
     }
 
     private void moveDown() {
         Random r = new Random();
         int gewichtung = 0;
-        gewichtung = r.nextInt(schwierigkeit);
+        gewichtung = r.nextInt(schwierigkeit - 5);
         y -= 7 - gewichtung;
     }
 
     public void move(Ball ball) {
 
-        if (ball.getyGeschw() > 0) {
+        if (ball.getyGeschw() > 0.0) {
             moveUp();
             if (y >= PingPong.HEIGHT_FIELD - HOEHE_SPIELER) {
                 y = PingPong.HEIGHT_FIELD - HOEHE_SPIELER;
             }
         } else {
             moveDown();
-            if (y <= 0) {
+            if (y <= 0.0) {
                 y = 0;
             }
         }

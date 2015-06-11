@@ -16,20 +16,22 @@ public class Einstellungen extends javax.swing.JFrame {
     private final int SCHWER, MITTEL, LEICHT;
     public static int maxPunkte;
     private boolean multiplayer, solo;
+    public static int schwierigkeit;
 
     /**
      * Creates new form Einstellungen
      */
     public Einstellungen() {
-
-        SCHWER = 3;
-        MITTEL = 4;
-        LEICHT = 5;
+        
+        SCHWER = 9;
+        MITTEL = 10;
+        LEICHT = 11;
+        schwierigkeit = LEICHT;
         multiplayer = false;
         solo = false;
 
         initComponents();
-        maxPunkte = Integer.parseInt(MaxPunktzahlTF.getText());
+        maxPunkte = 10;
         losButton.setEnabled(false);
     }
 
@@ -171,6 +173,11 @@ public class Einstellungen extends javax.swing.JFrame {
         jLabel6.setText("Schwierigkeit:");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "leicht", "mittel", "schwer" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ComputerPanelLayout = new javax.swing.GroupLayout(ComputerPanel);
         ComputerPanel.setLayout(ComputerPanelLayout);
@@ -315,14 +322,40 @@ public class Einstellungen extends javax.swing.JFrame {
     }//GEN-LAST:event_losButtonActionPerformed
 
     private void MaxPunktzahlTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxPunktzahlTFActionPerformed
-        // TODO add your handling code here:
+        maxPunkte = Integer.parseInt(MaxPunktzahlTF.getText());
     }//GEN-LAST:event_MaxPunktzahlTFActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+       setSchwierigkeit();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    public void setSchwierigkeit() {
+        
+         if(jComboBox2.getSelectedItem().equals("schwer")){
+             schwierigkeit = SCHWER;
+             System.out.println(schwierigkeit);
+         }
+         if(jComboBox2.getSelectedItem().equals("mittel")){
+             schwierigkeit = MITTEL;
+             System.out.println(schwierigkeit);
+         }
+         if(jComboBox2.getSelectedItem().equals("leicht")){
+             schwierigkeit = LEICHT;
+             System.out.println(schwierigkeit);
+         }
+         
+        
+    }
+
+    public int getSchwierigkeit() {
+        return schwierigkeit;
+    }
+    
 
     public int getMaxPunkte() {
         return maxPunkte;
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBox1;

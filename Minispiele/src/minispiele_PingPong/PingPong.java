@@ -7,6 +7,7 @@ package minispiele_PingPong;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 import java.util.logging.*;
 import javax.swing.*;
 
@@ -27,7 +28,8 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
     private int HOCH_SPIELER1,
             RUNTER_SPIELER1,
             HOCH_SPIELER2,
-            RUNTER_SPIELER2;
+            RUNTER_SPIELER2,
+            schwierigkeit;
 
     private boolean up1, down1, up2, down2, multiplayer, solo;
 
@@ -47,6 +49,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
      * @param spieler2
      */
     public PingPong(Spieler spieler1, Spieler spieler2) {
+
         multiplayer = true;
         this.spieler2 = spieler2;
 
@@ -73,6 +76,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
      * @param ki
      */
     public PingPong(Spieler spieler1, KI ki) {
+        this.schwierigkeit = Einstellungen.schwierigkeit;
 
         solo = true;
         this.ki = ki;
@@ -138,6 +142,13 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     }
 
+    public double bewegungsGewichtung() {
+        Random r = new Random();
+        Double gewichtung = 0.0;
+        gewichtung = r.nextDouble();
+        return gewichtung * 10;
+    }
+
     /**
      * Methode zur dauerhaften durchführung der Methode move(), sowie der
      * ständigen "Neuzeichung" durch repaint(). sleep(10) dient zur Pausierung,
@@ -169,10 +180,14 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
             if (solo) {
                 ki.move(ball);
                 if (kollisionPruefen(spieler1, ball)) {
-                    ball.setxGeschw(Ball.V);
+                    ball.setxGeschw(Ball.V + bewegungsGewichtung());
+                    System.out.println(Ball.V + bewegungsGewichtung());
+
                 }
                 if (kollisionPruefen(ki, ball)) {
-                    ball.setxGeschw(-Ball.V);
+                    ball.setxGeschw(-Ball.V + bewegungsGewichtung());
+                    System.out.println(-Ball.V - bewegungsGewichtung());
+
                 }
 
                 if (pzRechts.maxPunkteVergleichen()) {
@@ -186,14 +201,14 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
             }
             //MULTIPLAYER
-            if(multiplayer){
+            if (multiplayer) {
                 if (kollisionPruefen(spieler1, ball)) {
                     ball.setxGeschw(Ball.V);
                 }
                 if (kollisionPruefen(spieler2, ball)) {
                     ball.setxGeschw(-Ball.V);
                 }
-                
+
                 if (pzRechts.maxPunkteVergleichen()) {
                     pframe.gewinnermeldungAnzeigen("Spieler 1 gewinnt!");
                     thread.stop();
@@ -213,7 +228,11 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
             repaint();
             try {
-                Thread.sleep(10);
+                if (solo) {
+                    Thread.sleep(schwierigkeit);
+                } else {
+                    Thread.sleep(10);
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(PingPong.class.getName()).log(Level.SEVERE, null, ex);
             }

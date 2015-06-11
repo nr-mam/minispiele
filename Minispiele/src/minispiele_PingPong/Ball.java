@@ -20,9 +20,9 @@ import javax.swing.*;
 public class Ball extends JComponent {
 
     //Balldurchmesser 50px
-    public static final int V = 10;
+    public static final Double V = 10.0;
     private static final int bHeight = 50, bWidth = 50;
-    private int xGeschw, yGeschw;//Koordinatenänderung
+    private Double xGeschw, yGeschw;//Koordinatenänderung
     private int x, y;//Koordinaten
     private Component comp;
     private Image PingPongBall;
@@ -90,7 +90,7 @@ public class Ball extends JComponent {
 
     }
 
-    public void setxGeschw(int xGeschw) {
+    public void setxGeschw(double xGeschw) {
         this.xGeschw = xGeschw;
     }
 
@@ -104,7 +104,7 @@ public class Ball extends JComponent {
         return y;
     }
 
-    public int getyGeschw() {
+    public double getyGeschw() {
         return yGeschw;
     }
 
