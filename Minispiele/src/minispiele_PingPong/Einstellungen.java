@@ -210,6 +210,11 @@ public class Einstellungen extends javax.swing.JFrame {
         jLabel5.setText("maximale Punktzahl:");
 
         MaxPunktzahlTF.setText("1");
+        MaxPunktzahlTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaxPunktzahlTFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -308,6 +313,10 @@ public class Einstellungen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_losButtonActionPerformed
+
+    private void MaxPunktzahlTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxPunktzahlTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaxPunktzahlTFActionPerformed
 
     public int getMaxPunkte() {
         return maxPunkte;

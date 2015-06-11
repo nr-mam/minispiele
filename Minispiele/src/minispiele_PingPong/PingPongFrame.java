@@ -100,7 +100,7 @@ public class PingPongFrame extends javax.swing.JFrame {
             .addComponent(layers, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(1216, 788));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,8 +114,10 @@ public class PingPongFrame extends javax.swing.JFrame {
         return tfPunkteRechts;
     }
 
-    public JLabel getLabelGewinnermeldung() {
-        return labelGewinnermeldung;
+    public void gewinnermeldungAnzeigen(String text){
+        labelGewinnermeldung.setText(text);
+        layers.setLayer(labelGewinnermeldung, JLayeredPane.POPUP_LAYER);
+        labelGewinnermeldung.setVisible(true);
     }
 
 

@@ -176,13 +176,11 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
                 }
 
                 if (pzRechts.maxPunkteVergleichen()) {
-                    pframe.getLabelGewinnermeldung().setText("Spieler 1 gewinnt!");
-                    pframe.labelGewinnermeldung.setVisible(true);
+                    pframe.gewinnermeldungAnzeigen("Spieler 1 gewinnt!");
                     thread.stop();
                 }
                 if (pzLinks.maxPunkteVergleichen()) {
-                    pframe.getLabelGewinnermeldung().setText("KI gewinnt!");
-                    pframe.labelGewinnermeldung.setVisible(true);
+                    pframe.gewinnermeldungAnzeigen("KI gewinnt!");
                     thread.stop();
                 }
 
@@ -197,13 +195,11 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
                 }
                 
                 if (pzRechts.maxPunkteVergleichen()) {
-                    pframe.getLabelGewinnermeldung().setText("Spieler 1 gewinnt!");
-                    pframe.labelGewinnermeldung.setVisible(true);
+                    pframe.gewinnermeldungAnzeigen("Spieler 1 gewinnt!");
                     thread.stop();
                 }
                 if (pzLinks.maxPunkteVergleichen()) {
-                    pframe.getLabelGewinnermeldung().setText("Spieler 2 gewinnt!");
-                    pframe.labelGewinnermeldung.setVisible(true);
+                    pframe.gewinnermeldungAnzeigen("Spieler 2 gewinnt!");
                     thread.stop();
                 }
             }
