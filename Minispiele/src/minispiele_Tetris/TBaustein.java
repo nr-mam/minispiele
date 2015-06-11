@@ -156,7 +156,7 @@ public class TBaustein extends JComponent {
         ymax = blockForm.length;
         xmax = blockForm[ymax - 1].length;
         try {
-            Thread.sleep(15);
+            Thread.sleep(35);
         } catch (InterruptedException ex) {
             Logger.getLogger(TBaustein.class.getName()).log(Level.SEVERE, null, ex);
         }

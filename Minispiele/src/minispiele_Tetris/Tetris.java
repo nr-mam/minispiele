@@ -65,7 +65,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     }
 
     private void initialisiereSpielflaeche() {
-        spielflaeche = new int[16][27];
+        spielflaeche = new int[17][27];
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
                 spielflaeche[i][j] = -1;
@@ -125,6 +125,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             //Pfeiltaste nach unten wurde gedrückt.
             if(rotieren){
                 block.RotateBlock();
+                blockTest.RotateBlock();
             }
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
@@ -227,9 +228,10 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             // Ist der Block unten angekommen?
 
             if (isUnten) {
-                x = ((block.getX() / 30));
+                x = ((block.getY() / 30));
                 if(x <= 2){
-                start = false;                
+                start = false;
+                break;
                 }
                 for (int i = 0; i < block.getBlockForm().length; i++) {
                     for (int j = 0; j < block.getBlockForm()[i].length; j++) {
