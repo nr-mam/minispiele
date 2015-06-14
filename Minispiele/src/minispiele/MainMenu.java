@@ -5,6 +5,11 @@
  */
 package minispiele;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import minispiele_PingPong.Einstellungen;
 import minispiele_Snake.Snake;
 import minispiele_Tetris.Tetris;
@@ -35,55 +40,54 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        jLabelSnake = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelPingPong = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ButtunsSnake.jpg"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnake.jpg"))); // NOI18N
+        jLabelSnake.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel3MouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ButtunsTetris.jpg"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ButtunsBeenden.jpg"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ButtunsPinPong.jpg"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelSnakeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelSnakeMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
+                jLabelSnakeMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelSnakeMouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
+        getContentPane().add(jLabelSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 520, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 440, 520, 90));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 550, 520, -1));
+
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPong.jpg"))); // NOI18N
+        jLabelPingPong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelPingPongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelPingPongMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelPingPongMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelPingPongMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jLabelPingPong, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 250, 500, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backgroundHauptmenüMinispiele.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -91,56 +95,40 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
-    }//GEN-LAST:event_jLabel2MouseEntered
+    // PING PONG Botton
+    private void jLabelPingPongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseEntered
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongE.jpg")));
+    }//GEN-LAST:event_jLabelPingPongMouseEntered
 
-    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
-    }//GEN-LAST:event_jLabel3MouseEntered
+    private void jLabelPingPongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMousePressed
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongP.jpg")));
+    }//GEN-LAST:event_jLabelPingPongMousePressed
 
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+    private void jLabelPingPongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseExited
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPong.jpg")));
+    }//GEN-LAST:event_jLabelPingPongMouseExited
 
+    private void jLabelPingPongMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseReleased
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongE.jpg")));
         Einstellungen einstellungen = new Einstellungen();
         einstellungen.setVisible(true);
+    }//GEN-LAST:event_jLabelPingPongMouseReleased
+    // SNAKE Botton
+    private void jLabelSnakeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseEntered
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeE.jpg")));
+    }//GEN-LAST:event_jLabelSnakeMouseEntered
 
-    }//GEN-LAST:event_jLabel2MousePressed
+    private void jLabelSnakeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseExited
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnake.jpg")));
+    }//GEN-LAST:event_jLabelSnakeMouseExited
 
-    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
-        new Snake();
-    }//GEN-LAST:event_jLabel3MousePressed
+    private void jLabelSnakeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMousePressed
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeP.jpg")));
+    }//GEN-LAST:event_jLabelSnakeMousePressed
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-
-        new Tetris();
-    }//GEN-LAST:event_jLabel4MousePressed
-
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-        System.exit(0);
-    }//GEN-LAST:event_jLabel5MousePressed
-
-    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-    }//GEN-LAST:event_jLabel2MouseExited
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-    }
-
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-    }
-
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-    }
-
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
-    }
-
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, -1, -1));
-    }
+    private void jLabelSnakeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseReleased
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeE.jpg")));
+    }//GEN-LAST:event_jLabelSnakeMouseReleased
 
     /**
      * @param args the command line arguments
@@ -177,11 +165,13 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
 
+    private ImageIcon ii;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelPingPong;
+    private javax.swing.JLabel jLabelSnake;
     // End of variables declaration//GEN-END:variables
 }
