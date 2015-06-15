@@ -33,8 +33,8 @@ public class Futter extends JComponent {
 
     }
     public void position(){
-        xCoordinate = 10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10));
-        yCoordinate = 10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
+        xCoordinate = 10+10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10));
+        yCoordinate = 10+10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
                 
     }
     public void paintComponent(Graphics gr) {

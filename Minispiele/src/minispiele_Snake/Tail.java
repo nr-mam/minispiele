@@ -19,6 +19,7 @@ public class Tail extends JComponent {
 
     public int xCoordinate, yCoordinate;
     public Image imgTail;
+    public Tail next;
 
     public Tail(int x, int y) {
         xCoordinate = x;
@@ -30,7 +31,6 @@ public class Tail extends JComponent {
             System.out.println("Image not found.");
         }
         imgTail = this.imgTail;
-        
     }
 
    
@@ -48,4 +48,27 @@ public class Tail extends JComponent {
         gr.drawImage(imgTail, xCoordinate, yCoordinate, this);
 
     }
+    public void update(int x, int y){
+        if(next != null){
+            next.update(xCoordinate, yCoordinate);
+            xCoordinate = x;
+            yCoordinate = y;
+        }
+        
+    }
+    public void draw(Graphics g){
+        paintComponent(g);
+        if(next != null){
+            next.draw(g);
+        }
+    }
+    public void add(){
+        if(next == null){
+            next = new Tail(xCoordinate, yCoordinate);
+            
+        }else{
+            next.add();
+        }
+    }
+    
 }

@@ -25,8 +25,8 @@ import minispiele_Tetris.Tetris;
  */
 public class Snake extends JPanel implements Runnable, KeyListener {
 
-    public final static int WIDTH_FRAME = 1500, HEIGHT_FRAME = 700;
-    public final static int WIDTH_FIELD = 1480, HEIGHT_FIELD = 680;
+    public final static int WIDTH_FRAME = 1200, HEIGHT_FRAME = 700;
+    public final static int WIDTH_FIELD = 1180, HEIGHT_FIELD = 680;
     public int vStart = 100; // Geschwindigkeit
     private Image imgField;
     private int width, height;
@@ -36,7 +36,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private int tempo;
     private boolean left, right, up, down;
     public boolean gameover = false;
-    public Tail tail;
+    public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
     //TODO
@@ -44,7 +44,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public Snake() {
 
         try {
-            imgField = ImageIO.read(this.getClass().getResource("..\\images\\SnakeSpielfeld.jpg"));
+            imgField = ImageIO.read(this.getClass().getResource("..\\images\\SnakeSpielfeld.png"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,8 +80,11 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
+        
         while (true) {
-            tail = new Tail(head.getxCoordinate(), head.getyCoordinate());
+            
+            first = new Tail(head.getxCoordinate(), head.getyCoordinate());
+            
             speed = vStart;
             if (head.isRIGHT()) {
                 head.moveHeadRight();
@@ -109,7 +112,15 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (gameover == true) {
                 break;
             }
-            head.tailAdd();
+            for (int i = 0; i < score; i++) {
+                taillist.add(first);
+                
+            }
+            
+            
+            
+        
+            
 
         }
 
@@ -139,6 +150,9 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         score++;
         eat.position();
         
+    }
+    public void update(){
+        first.update(first.getxCoordinate(),first.getyCoordinate());
     }
 
 }
