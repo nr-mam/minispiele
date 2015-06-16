@@ -156,9 +156,6 @@ public class TBaustein extends JComponent {
                 currentBlockForm++;
                 blockForm = blockFormRotation.get(currentBlockForm);
             }
-
-            ymax = blockForm.length;
-            xmax = blockForm[ymax - 1].length;
             try {
                 Thread.sleep(20);
             } catch (InterruptedException ex) {
@@ -166,10 +163,12 @@ public class TBaustein extends JComponent {
             }
         }
 
-        if (grenze <= (X + (30 * (ymax-1))) || besetzt) {
+        if (grenze <= (X + (30 * (ymax - 1))) || besetzt) {
             currentBlockForm = lastBlockForm;
             blockForm = blockFormRotation.get(lastBlockForm);
         }
+        ymax = blockForm.length;
+        xmax = blockForm[ymax - 1].length;
 
     }
 

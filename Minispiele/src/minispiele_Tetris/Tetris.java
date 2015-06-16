@@ -5,7 +5,9 @@
  */
 package minispiele_Tetris;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -106,6 +108,11 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
 
         }
         scores.paintComponent(gr);
+        gr.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        gr.setColor(Color.WHITE);
+        if (!start) {
+            gr.drawString("GAME OVER", 55, 350);
+        }
 
     }
 
@@ -119,7 +126,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         int[][] spielflaecheKopie;
         while (start) {
             isOK = true;
-            wartezeit = 70;
+            wartezeit = 80;
             scores.ScoreAdd(1);
 
             //Pfeiltaste nach oben wurde gedrückt.
@@ -128,7 +135,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 blockTest.RotateBlock(GRENZE_RECHTS, false);
                 for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
                     for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + i));
+                        x = (((block.getX() / 30) + i) - 1);
                         y = (((block.getY() / 30) + j));
                         if (block.getBlockForm()[i][j] == 1) {
                             if (spielflaeche[x][j] != -1) {
@@ -254,11 +261,9 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
+            repaint();
         }
-        String end = "GAME OVER";
-        JOptionPane.showMessageDialog(null, end, "Tetris",
-                JOptionPane.INFORMATION_MESSAGE);
-
+        
     }
 
     private void linksTesten(int x, int y, boolean isOK) {
