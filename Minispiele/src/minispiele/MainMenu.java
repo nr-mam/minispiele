@@ -41,8 +41,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelSnake = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelTetris = new javax.swing.JLabel();
+        jLabelBeenden = new javax.swing.JLabel();
         jLabelPingPong = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -66,11 +66,39 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 520, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 440, 520, 90));
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg"))); // NOI18N
+        jLabelTetris.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelTetrisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelTetrisMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelTetrisMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelTetrisMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jLabelTetris, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 440, 520, 90));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 550, 520, -1));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg"))); // NOI18N
+        jLabelBeenden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMouseReleased(evt);
+            }
+        });
+        getContentPane().add(jLabelBeenden, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 550, 520, -1));
 
         jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPong.jpg"))); // NOI18N
         jLabelPingPong.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,7 +156,44 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jLabelSnakeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseReleased
         jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeE.jpg")));
+        new Snake();
     }//GEN-LAST:event_jLabelSnakeMouseReleased
+
+    //TETRIS Botton
+    private void jLabelTetrisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseEntered
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisE.jpg")));
+    }//GEN-LAST:event_jLabelTetrisMouseEntered
+
+    private void jLabelTetrisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseExited
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg")));
+    }//GEN-LAST:event_jLabelTetrisMouseExited
+
+    private void jLabelTetrisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMousePressed
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisP.jpg")));
+    }//GEN-LAST:event_jLabelTetrisMousePressed
+
+    private void jLabelTetrisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseReleased
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisE.jpg")));
+        new Tetris();
+    }//GEN-LAST:event_jLabelTetrisMouseReleased
+
+    //BEENDEN Botton
+    private void jLabelBeendenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseEntered
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenE.jpg")));
+    }//GEN-LAST:event_jLabelBeendenMouseEntered
+
+    private void jLabelBeendenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseExited
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg")));
+    }//GEN-LAST:event_jLabelBeendenMouseExited
+
+    private void jLabelBeendenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMousePressed
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenP.jpg")));
+    }//GEN-LAST:event_jLabelBeendenMousePressed
+
+    private void jLabelBeendenMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseReleased
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenE.jpg")));
+        System.exit(0);
+    }//GEN-LAST:event_jLabelBeendenMouseReleased
 
     /**
      * @param args the command line arguments
@@ -169,9 +234,9 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelBeenden;
     private javax.swing.JLabel jLabelPingPong;
     private javax.swing.JLabel jLabelSnake;
+    private javax.swing.JLabel jLabelTetris;
     // End of variables declaration//GEN-END:variables
 }
