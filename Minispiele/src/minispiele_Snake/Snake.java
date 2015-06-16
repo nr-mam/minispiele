@@ -39,6 +39,8 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
+    public Tail next = null;
+    
     //TODO
 
     public Snake() {
@@ -70,9 +72,14 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        for (Tail tail : taillist) {
-            tail.paintComponent(gr);
+        if(first != null){
+            first.paintComponent(gr);
         }
+        if(next != null){
+            next.paintComponent(gr);
+        }
+        
+
     }
 
     @Override
@@ -80,11 +87,11 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
-        
+
         while (true) {
-            
+
             first = new Tail(head.getxCoordinate(), head.getyCoordinate());
-            
+
             speed = vStart;
             if (head.isRIGHT()) {
                 head.moveHeadRight();
@@ -101,6 +108,8 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (head.getxCoordinate() == eat.getxCoordinate()
                     && head.getyCoordinate() == eat.getyCoordinate()) {
                 score();
+                first.add();
+                
             }
 
             repaint();
@@ -112,14 +121,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (gameover == true) {
                 break;
             }
-            for (int i = 0; i < score; i++) {
-                taillist.add(first);
-                
-            }
-            
-            
-            
-        
+            first.update(first.getxCoordinate(), first.getyCoordinate());
             
 
         }
@@ -149,10 +151,11 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private void score() {
         score++;
         eat.position();
-        
+
     }
-    public void update(){
-        first.update(first.getxCoordinate(),first.getyCoordinate());
+
+    public void update() {
+        first.update(first.getxCoordinate(), first.getyCoordinate());
     }
 
 }

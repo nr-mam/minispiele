@@ -65,6 +65,7 @@ public class Tail extends JComponent {
     public void add(){
         if(next == null){
             next = new Tail(xCoordinate, yCoordinate);
+            next.repaint();
             
         }else{
             next.add();
