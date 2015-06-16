@@ -157,15 +157,20 @@ public class TBaustein extends JComponent {
                 blockForm = blockFormRotation.get(currentBlockForm);
             }
             try {
-                Thread.sleep(20);
+                Thread.sleep(90);
             } catch (InterruptedException ex) {
                 Logger.getLogger(TBaustein.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         if (grenze <= (X + (30 * (ymax - 1))) || besetzt) {
-            currentBlockForm = lastBlockForm;
-            blockForm = blockFormRotation.get(lastBlockForm);
+            System.out.println("Besetzt: " + besetzt);
+            if (currentBlockForm == 0) {
+                blockForm = blockFormRotation.get(blockFormRotation.size() - 1);
+            } else {
+                blockForm = blockFormRotation.get(currentBlockForm - 1);
+            }
+
         }
         ymax = blockForm.length;
         xmax = blockForm[ymax - 1].length;

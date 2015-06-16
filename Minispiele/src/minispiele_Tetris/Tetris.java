@@ -111,6 +111,15 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         gr.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
         gr.setColor(Color.WHITE);
         if (!start) {
+            
+            for (int i = 0; i < spielflaeche.length; i++) {
+                for (int j = 0; j < spielflaeche[i].length; j++) {
+                    if (spielflaeche[i][j] != -1 && start) {
+                        gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), ((j * 30) - 1), this);
+                    }
+                }
+
+            }
             gr.drawString("GAME OVER", 55, 350);
         }
 
@@ -126,23 +135,31 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         int[][] spielflaecheKopie;
         while (start) {
             isOK = true;
-            wartezeit = 80;
-            scores.ScoreAdd(1);
+            wartezeit = 65;
 
             //Pfeiltaste nach oben wurde gedrückt.
             if (rotieren) {
+
+                boolean weiter = true;
+
                 block.RotateBlock(GRENZE_RECHTS, false);
                 blockTest.RotateBlock(GRENZE_RECHTS, false);
-                for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
-                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                        x = (((block.getX() / 30) + i) - 1);
+                int blocklaenge1 = block.getBlockForm().length;
+                int blocklaenge2 = block.getBlockForm()[0].length;
+                for (int i = blocklaenge1 - 1; i >= 0; i--) {
+                    for (int j = 0; j < blocklaenge2; j++) {
+                        x = (((block.getX() / 30) + i));
                         y = (((block.getY() / 30) + j));
-                        if (block.getBlockForm()[i][j] == 1) {
-                            if (spielflaeche[x][j] != -1) {
-                                block.RotateBlock(GRENZE_RECHTS, true);
-                                blockTest.RotateBlock(GRENZE_RECHTS, true);
+                        if (weiter) {
+                            if (block.getBlockForm()[i][j] == 1) {
+                                if (spielflaeche[x][y] != -1) {
+                                    block.RotateBlock(GRENZE_RECHTS, true);
+                                    blockTest.RotateBlock(GRENZE_RECHTS, true);
+                                    weiter = false;
+                                }
                             }
                         }
+
                     }
                 }
 
@@ -254,8 +271,6 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
 
             }
-
-            repaint();
             try {
                 Thread.sleep(wartezeit);
             } catch (InterruptedException ex) {
@@ -263,7 +278,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             }
             repaint();
         }
-        
+
     }
 
     private void linksTesten(int x, int y, boolean isOK) {
