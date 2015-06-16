@@ -122,23 +122,34 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             wartezeit = 70;
             scores.ScoreAdd(1);
 
-            //Pfeiltaste nach unten wurde gedrückt.
+            //Pfeiltaste nach oben wurde gedrückt.
             if (rotieren) {
-                block.RotateBlock();
-                blockTest.RotateBlock();
-            }
-            if (unten) {
-                block.moveBlockDown(GRENZE_UNTEN);
-                wartezeit = 40;
+                block.RotateBlock(GRENZE_RECHTS, false);
+                blockTest.RotateBlock(GRENZE_RECHTS, false);
+                for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
+                    for (int j = 0; j < block.getBlockForm()[i].length; j++) {
+                        x = (((block.getX() / 30) + i));
+                        y = (((block.getY() / 30) + j));
+                        if (block.getBlockForm()[i][j] == 1) {
+                            if (spielflaeche[x][j] != -1) {
+                                block.RotateBlock(GRENZE_RECHTS, true);
+                                blockTest.RotateBlock(GRENZE_RECHTS, true);
+                            }
+                        }
+                    }
+                }
+
             }
 
             linksTesten(x, y, isOK);
             rechtsTesten(x, y, isOK);
+
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
+
             //Pfeiltaste nach unten wurde gedrückt.
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
-                wartezeit = 40;
+                wartezeit = 20;
                 scores.ScoreAdd(10);
             }
 

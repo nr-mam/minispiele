@@ -28,6 +28,7 @@ public class TBaustein extends JComponent {
     private int[][] blockForm; // Speichert die Form des jeweiligen Typs
     private ArrayList<int[][]> blockFormRotation; // Speichert alle Rotationsmöglichkeiten eines Bausteines
     private int currentBlockForm;
+    private int lastBlockForm;
     Image img; // Blockbild
     private Image[] imgs; // Alle Blockbilderfarben
     private int ID; // Typ des Blocks
@@ -37,6 +38,7 @@ public class TBaustein extends JComponent {
     TBaustein(int blockID) {
         blockFormRotation = new ArrayList<>(4);
         currentBlockForm = 0;
+        lastBlockForm = 0;
         X = 180;
         Y = 30;
         //X=30;
@@ -79,8 +81,8 @@ public class TBaustein extends JComponent {
         if (ID == 1) {
             blockForm = new int[][]{{1, 1, 1}, {0, 1, 0}};
             blockFormRotation.add(blockForm);
-            blockFormRotation.add(new int[][]{{0, 1, 0}, {1, 1, 1}});
             blockFormRotation.add(new int[][]{{0, 1}, {1, 1}, {0, 1}});
+            blockFormRotation.add(new int[][]{{0, 1, 0}, {1, 1, 1}});
             blockFormRotation.add(new int[][]{{1, 0}, {1, 1}, {1, 0}});
             img = imgs[1];
         }
@@ -144,21 +146,29 @@ public class TBaustein extends JComponent {
 
     }
 
-    public void RotateBlock() {
-        if (blockFormRotation.size() == currentBlockForm + 1) {
-            blockForm = blockFormRotation.get(0);
-            currentBlockForm = 0;
-        } else {
-            currentBlockForm++;
-        blockForm = blockFormRotation.get(currentBlockForm);
+    public void RotateBlock(int grenze, boolean besetzt) {
+        lastBlockForm = blockFormRotation.indexOf(blockForm);
+        if (!besetzt) {
+            if (blockFormRotation.size() == currentBlockForm + 1) {
+                blockForm = blockFormRotation.get(0);
+                currentBlockForm = 0;
+            } else {
+                currentBlockForm++;
+                blockForm = blockFormRotation.get(currentBlockForm);
+            }
+
+            ymax = blockForm.length;
+            xmax = blockForm[ymax - 1].length;
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TBaustein.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        ymax = blockForm.length;
-        xmax = blockForm[ymax - 1].length;
-        try {
-            Thread.sleep(35);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TBaustein.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (grenze <= (X + (30 * (ymax-1))) || besetzt) {
+            currentBlockForm = lastBlockForm;
+            blockForm = blockFormRotation.get(lastBlockForm);
         }
 
     }
