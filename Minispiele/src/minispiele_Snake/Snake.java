@@ -39,7 +39,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
-    public Tail next = null;
     
     //TODO
 
@@ -75,9 +74,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         if(first != null){
             first.paintComponent(gr);
         }
-        if(next != null){
-            next.paintComponent(gr);
-        }
+        
         
 
     }
@@ -122,6 +119,10 @@ public class Snake extends JPanel implements Runnable, KeyListener {
                 break;
             }
             first.update(first.getxCoordinate(), first.getyCoordinate());
+            if (first.next != null){
+                first.next.update(first.next.xCoordinate, first.next.yCoordinate);
+            }
+            
             
 
         }
