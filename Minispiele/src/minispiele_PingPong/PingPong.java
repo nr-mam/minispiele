@@ -14,6 +14,11 @@ import javax.swing.*;
 /**
  * Erstellt das PingPong-Spiel.
  *
+ * Das PingPong Spiel an sich ist ein JPanel in das ständig gezeichnet wird.
+ * Diese Panel wird letztendlich nur dem LayeredPanel layers in der Klasse
+ * PingPongFrame hinzugefügt. Die Klasse muss Runnable sein, da diese ausgeführt
+ * wird über die run() methode.
+ *
  * @author Richard
  */
 public final class PingPong extends JPanel implements Runnable, KeyListener {
@@ -43,13 +48,14 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
     private Thread thread;
 
     /**
-     * Erstellt zwei Spieler (Multiplayer)
+     * Erstellt zwei Spieler (MULTIPLAYER) - 
+     * Startet das Spiel.
      *
-     * @param spieler1
-     * @param spieler2
+     * @param spieler1 erster Spieler
+     * @param spieler2 zweiter Spieler
      */
     public PingPong(Spieler spieler1, Spieler spieler2) {
-
+        this.schwierigkeit = Einstellungen.schwierigkeit;
         multiplayer = true;
         this.spieler2 = spieler2;
 
@@ -59,7 +65,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
         RUNTER_SPIELER2 = KeyEvent.VK_DOWN;
 
         System.out.println("Steuerung: W/S und Pfeil hoch/Pfeil runter");
-        ball = new Ball(100, 100, this);
+        ball = new Ball(100, 100, this, schwierigkeit);
 
         pframe = new PingPongFrame("PINGPONG --- MODUS: MULTIPLAYER", this, ball);
         setSimilarities(spieler1);
@@ -70,10 +76,11 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     * Erstellt einen Spieler und einen KI (Sologame)
+     * Erstellt einen Spieler und einen KI (SOLO) - 
+     * Startet das Spiel.
      *
-     * @param spieler1
-     * @param ki
+     * @param spieler1 der erste(einzige) Spieler
+     * @param ki der "computergesteuerte" Gegner
      */
     public PingPong(Spieler spieler1, KI ki) {
         this.schwierigkeit = Einstellungen.schwierigkeit;
@@ -83,7 +90,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
         HOCH_SPIELER1 = KeyEvent.VK_UP;
         RUNTER_SPIELER1 = KeyEvent.VK_DOWN;
-        ball = new Ball(100, 100, this);
+        ball = new Ball(100, 100, this, schwierigkeit);
         pframe = new PingPongFrame("PINGPONG --- MODUS: SOLO", this, ball);
         setSimilarities(spieler1);
         //Starten des Spieles
@@ -92,6 +99,12 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     }
 
+    /**
+     * Setzt die gemeinsamkeiten der beiden Konstruktoren um redundanten code zu
+     * vermeiden.
+     *
+     * @param spieler1 der erste Spieler
+     */
     public void setSimilarities(Spieler spieler1) {
 
         pzLinks = new Punktezaehler(pframe.getTfPunkteLinks(), ball, TREFFER_LINKS);
@@ -109,6 +122,13 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     }
 
+    /**
+     * Prüft ob eine Kollision bei einem Spieler vorliegt.
+     *
+     * @param spieler der Spieler bei dem geprüft werden soll
+     * @param ball der Spielball
+     * @return
+     */
     public boolean kollisionPruefen(Spieler spieler, Ball ball) {
         Rectangle spielerHitbox = new Rectangle(spieler.getX(), spieler.getY(), spieler.getBREITE(), spieler.getHOEHE());
         Rectangle ballHitbox = new Rectangle(ball.getX(), ball.getY(), 50, 50);
@@ -116,6 +136,13 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     }
 
+    /**
+     * Prüft ob eine Kollision bei dem KI vorliegt.
+     *
+     * @param ki der KI bei dem geprüft werden soll
+     * @param ball der SPielball
+     * @return
+     */
     public boolean kollisionPruefen(KI ki, Ball ball) {
         Rectangle kiHitbox = new Rectangle(ki.getX(), ki.getY(), ki.getBREITE(), ki.getHOEHE());
         Rectangle ballHitbox = new Rectangle(ball.getX(), ball.getY(), 50, 50);
@@ -124,9 +151,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     * Zeichnet das Hintergrundbild und den Ball.
-     *
-     * @param gr
+     * Zeichnet den Ball, Spieler1 und den KI oder Spieler2.
      */
     @Override
     public void paintComponent(Graphics gr) {
@@ -142,11 +167,18 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     }
 
+    /**
+     * Dient zur erzeugung einer Variablen die zur veränderung der
+     * Geschwindigkeit verwendet wird, um ein bisschen mehr bewegung in das
+     * Spiel zu bringen.
+     *
+     * @return
+     */
     public double bewegungsGewichtung() {
         Random r = new Random();
         Double gewichtung = 0.0;
         gewichtung = r.nextDouble();
-        return gewichtung * 10;
+        return gewichtung * 2;
     }
 
     /**
@@ -181,12 +213,12 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
                 ki.move(ball);
                 if (kollisionPruefen(spieler1, ball)) {
                     ball.setxGeschw(Ball.V + bewegungsGewichtung());
-                    System.out.println(Ball.V + bewegungsGewichtung());
+                    //System.out.println(Ball.V + bewegungsGewichtung());
 
                 }
                 if (kollisionPruefen(ki, ball)) {
                     ball.setxGeschw(-Ball.V + bewegungsGewichtung());
-                    System.out.println(-Ball.V - bewegungsGewichtung());
+                    // System.out.println(-Ball.V + bewegungsGewichtung());
 
                 }
 
@@ -228,11 +260,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
             repaint();
             try {
-                if (solo) {
                     Thread.sleep(schwierigkeit);
-                } else {
-                    Thread.sleep(10);
-                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(PingPong.class.getName()).log(Level.SEVERE, null, ex);
             }

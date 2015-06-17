@@ -25,10 +25,10 @@ public class PingPongFrame extends javax.swing.JFrame {
     private final Ball ball;
 
     /**
-     * Creates new form PingPongFrame
-     * @param title
-     * @param comp
-     * @param ball
+     * Erstellt das Frame vom PingPong Spiel.
+     * @param title Titel des Spieles
+     * @param comp das Spiel an sich (JPanel)
+     * @param ball der Spielball
      */
     public PingPongFrame(String title, Component comp, Ball ball) {
         initComponents();
@@ -57,18 +57,10 @@ public class PingPongFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         layers = new javax.swing.JLayeredPane();
-        labelGewinnermeldung = new javax.swing.JLabel();
         tfPunkteLinks = new javax.swing.JTextField();
         tfPunkteRechts = new javax.swing.JTextField();
         labelHintergrund = new javax.swing.JLabel();
-
-        labelGewinnermeldung.setBackground(new Color(153,153,153,100));
-        labelGewinnermeldung.setFont(new java.awt.Font("SF Movie Poster", 2, 48)); // NOI18N
-        labelGewinnermeldung.setForeground(new java.awt.Color(255, 0, 0));
-        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelGewinnermeldung.setOpaque(true);
-        layers.add(labelGewinnermeldung);
-        labelGewinnermeldung.setBounds(0, 0, 1200, 750);
+        labelGewinnermeldung = new javax.swing.JLabel();
 
         tfPunkteLinks.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         tfPunkteLinks.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -88,6 +80,14 @@ public class PingPongFrame extends javax.swing.JFrame {
         labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPongFeld.jpg"))); // NOI18N
         layers.add(labelHintergrund);
         labelHintergrund.setBounds(0, 0, 1200, 750);
+
+        labelGewinnermeldung.setBackground(new Color(153,153,153,100));
+        labelGewinnermeldung.setFont(new java.awt.Font("SF Movie Poster", 2, 48)); // NOI18N
+        labelGewinnermeldung.setForeground(new java.awt.Color(255, 0, 0));
+        labelGewinnermeldung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGewinnermeldung.setOpaque(true);
+        layers.add(labelGewinnermeldung);
+        labelGewinnermeldung.setBounds(0, 0, 1200, 750);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +113,10 @@ public class PingPongFrame extends javax.swing.JFrame {
     public JTextField getTfPunkteRechts() {
         return tfPunkteRechts;
     }
-
+    /**
+     * holt die Gewinnermeldung in den Vordergrund.
+     * @param text 
+     */
     public void gewinnermeldungAnzeigen(String text){
         labelGewinnermeldung.setText(text);
         layers.setLayer(labelGewinnermeldung, JLayeredPane.POPUP_LAYER);

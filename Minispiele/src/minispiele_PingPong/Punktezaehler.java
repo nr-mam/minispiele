@@ -22,6 +22,15 @@ public class Punktezaehler {
     private int zaehler1, zaehler2, seite, maxPunkte;
     private Einstellungen einst;
 
+    /**
+     * Erstellt einen Punktezähler der jeden Kontakt mit dem Ball mitzählt.
+     * Dieser Punktezähler ist ein sehr schmales Rechteck an dem jeweiligen Rand
+     * des Spielfeldes.
+     *
+     * @param tf anzeigefeld der aktuellen Punkte
+     * @param ball der Spielball
+     * @param seite die Seite auf der dieser Punktezähler erstellt werden soll
+     */
     public Punktezaehler(JTextField tf, Ball ball, int seite) {
         this.ball = ball;
         this.tf = tf;
@@ -31,6 +40,12 @@ public class Punktezaehler {
         zaehler2 = 0;
     }
 
+    /**
+     * vergleicht die Punkte mit der angegebenen maximalen Punktzahl welche in
+     * den Einstellungen festgelegt wurde
+     *
+     * @return limit ist erreicht = true, nicht = false
+     */
     public boolean maxPunkteVergleichen() {
         if (maxPunkte == zaehler1 || maxPunkte == zaehler2) {
             return true;
@@ -51,6 +66,11 @@ public class Punktezaehler {
         return rechteHitbox.intersects(ballHitbox);
     }
 
+    /**
+     * Addiert der Anzeigetafel und der Zählvariable den Punkt falls eine
+     * Kollision aufgetreten ist.
+     * @param tf
+     */
     public void addieren(JTextField tf) {
         this.tf = tf;
         if (kollisionLinksPruefen(ball)) {

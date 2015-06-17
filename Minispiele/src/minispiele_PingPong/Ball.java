@@ -20,25 +20,29 @@ import javax.swing.*;
 public class Ball extends JComponent {
 
     //Balldurchmesser 50px
-    public static final Double V = 10.0;
+    public static Double V = 0.0;
     private static final int bHeight = 50, bWidth = 50;
     private Double xGeschw, yGeschw;//Koordinatenänderung
-    private int x, y;//Koordinaten
+    private int x, y, schwierigkeit;//Koordinaten
     private Component comp;
     private Image PingPongBall;
 
     /**
      * Erstellt den Ball an der Stelle P(x/y) und bekommt den Komponenten der
      * PingPong-Klasse übergeben um ihn letztendlich in der paintComponent()
-     * Methode zeichnen zu können.
+     * Methode zeichnen zu können. Die schwierigkeit legt die geschwindigkeit
+     * des Balles fest.
      *
      * @param x
      * @param y
      * @param comp
+     * @param schwierigkeit
      */
-    public Ball(int x, int y, Component comp) {
+    public Ball(int x, int y, Component comp, int schwierigkeit) {
+        this.schwierigkeit = schwierigkeit;
         this.x = x;
         this.y = y;
+        V = (double) schwierigkeit;
         this.xGeschw = V;
         this.yGeschw = V;
         this.comp = comp;
@@ -46,8 +50,9 @@ public class Ball extends JComponent {
     }
 
     /**
+     * Lädt das Bild vom Ball.
      *
-     * @return
+     * @return Das Bild vom Ball
      */
     private Image ladeBall() {
         try {

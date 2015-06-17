@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * KI ist eine Unterklasse vom Spieler da vieles gleich ist. Nur die Bewegung
+ * wird anders gesteuert und der KI ist an einem anderen Punkt.
  *
  * @author Richard
  */
@@ -22,6 +24,15 @@ public class KI extends Spieler {
     private int x, y, schwierigkeit;
     private final Color color;
 
+    /**
+     * Erstellt einen KI bei dem man die Schwierigkeitstufe mit dem Parameter
+     * schwierigkeit einstellen kann. Die x Koordinate dient zum anfänglichen
+     * "spawnpunkt".
+     *
+     * @param x
+     * @param color
+     * @param schwierigkeit
+     */
     public KI(int x, Color color, int schwierigkeit) {
         super(x, color);
         this.x = x;
@@ -34,20 +45,31 @@ public class KI extends Spieler {
 
     }
 
+    /**
+     * Bewegt den KI nach oben.
+     */
+
     private void moveUp() {
         Random r = new Random();
         int gewichtung = 0;
-        gewichtung = r.nextInt(schwierigkeit - 5);
-        y += 7 - gewichtung;
+        gewichtung = r.nextInt(schwierigkeit);
+        y += 7 + gewichtung;
     }
 
+    /**
+     * bewegt den KI nach unten.
+     */
     private void moveDown() {
         Random r = new Random();
         int gewichtung = 0;
-        gewichtung = r.nextInt(schwierigkeit - 5);
-        y -= 7 - gewichtung;
+        gewichtung = r.nextInt(schwierigkeit);
+        y -= 7 + gewichtung;
     }
-
+    /**
+     * legt fest wann, wohin und wie schnell der KI sich bewegen soll.
+     * Die Bewegung ist abhängig von der y-Koordinate des Balles.
+     * @param ball der Spielball
+     */
     public void move(Ball ball) {
 
         if (ball.getyGeschw() > 0.0) {
