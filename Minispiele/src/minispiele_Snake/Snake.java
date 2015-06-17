@@ -39,9 +39,8 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
-    
-    //TODO
 
+    //TODO
     public Snake() {
 
         try {
@@ -71,16 +70,15 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        if(first != null){
-            first.paintComponent(gr);
-        }
-        
+        first.paintComponent(gr);
         
 
     }
 
     @Override
     public void run() {
+        int i = 0;
+
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
@@ -106,7 +104,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
                     && head.getyCoordinate() == eat.getyCoordinate()) {
                 score();
                 first.add();
-                
+
             }
 
             repaint();
@@ -119,12 +117,9 @@ public class Snake extends JPanel implements Runnable, KeyListener {
                 break;
             }
             first.update(first.getxCoordinate(), first.getyCoordinate());
-            if (first.next != null){
-                first.next.update(first.next.xCoordinate, first.next.yCoordinate);
-            }
-            
             
 
+            
         }
 
     }
@@ -157,6 +152,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
 
     public void update() {
         first.update(first.getxCoordinate(), first.getyCoordinate());
+
     }
 
 }

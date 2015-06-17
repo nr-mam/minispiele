@@ -20,7 +20,7 @@ public class Tail extends JComponent {
     public int xCoordinate, yCoordinate;
     public Image imgTail;
     public Tail next;
-    
+    public int taillength =1;
 
     public Tail(int x, int y) {
         xCoordinate = x;
@@ -34,8 +34,6 @@ public class Tail extends JComponent {
         imgTail = this.imgTail;
     }
 
-   
-
     public int getxCoordinate() {
         return xCoordinate;
     }
@@ -47,35 +45,48 @@ public class Tail extends JComponent {
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         gr.drawImage(imgTail, xCoordinate, yCoordinate, this);
+        if(next != null){
+            next.paintComponent(gr);
+        }
+        
+               
+        
         
 
     }
-    public void update(int x, int y){
-        if(next != null){
+
+    public void update(int x, int y) {
+        if (next != null) {
             next.update(xCoordinate, yCoordinate);
             xCoordinate = x;
             yCoordinate = y;
-            
+            next.repaint();
+
         }
-        
+
     }
-    public void draw(Graphics g){
+
+    public void draw(Graphics g) {
         paintComponent(g);
-        if(next != null){
+        if (next != null) {
             next.draw(g);
         }
     }
-    public void add(){
-        if(next == null){
+
+    public void add() {
+        
+        if (next == null) {
             next = new Tail(xCoordinate, yCoordinate);
             next.repaint();
-            
-            
-            
-        }else{
+
+        } else {
             next.add();
         }
     }
+
+    public int getTaillength() {
+        return taillength;
+    }
     
-    
+
 }
