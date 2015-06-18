@@ -125,73 +125,73 @@ public class MainMenu extends javax.swing.JFrame {
 
     // PING PONG Botton
     private void jLabelPingPongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseEntered
-        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongE.jpg")));
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonPingPongE.jpg")));
     }//GEN-LAST:event_jLabelPingPongMouseEntered
 
     private void jLabelPingPongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMousePressed
-        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongP.jpg")));
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonPingPongP.jpg")));
     }//GEN-LAST:event_jLabelPingPongMousePressed
 
     private void jLabelPingPongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseExited
-        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPong.jpg")));
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonPingPong.jpg")));
     }//GEN-LAST:event_jLabelPingPongMouseExited
 
     private void jLabelPingPongMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPingPongMouseReleased
-        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPongE.jpg")));
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonPingPongE.jpg")));
         Einstellungen einstellungen = new Einstellungen();
         einstellungen.setVisible(true);
     }//GEN-LAST:event_jLabelPingPongMouseReleased
     // SNAKE Botton
     private void jLabelSnakeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseEntered
-        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeE.jpg")));
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonSnakeE.jpg")));
     }//GEN-LAST:event_jLabelSnakeMouseEntered
 
     private void jLabelSnakeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseExited
-        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnake.jpg")));
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonSnake.jpg")));
     }//GEN-LAST:event_jLabelSnakeMouseExited
 
     private void jLabelSnakeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMousePressed
-        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeP.jpg")));
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonSnakeP.jpg")));
     }//GEN-LAST:event_jLabelSnakeMousePressed
 
     private void jLabelSnakeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSnakeMouseReleased
-        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnakeE.jpg")));
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonSnakeE.jpg")));
         new Snake();
     }//GEN-LAST:event_jLabelSnakeMouseReleased
 
     //TETRIS Botton
     private void jLabelTetrisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseEntered
-        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisE.jpg")));
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetrisE.jpg")));
     }//GEN-LAST:event_jLabelTetrisMouseEntered
 
     private void jLabelTetrisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseExited
-        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg")));
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetris.jpg")));
     }//GEN-LAST:event_jLabelTetrisMouseExited
 
     private void jLabelTetrisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMousePressed
-        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisP.jpg")));
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetrisP.jpg")));
     }//GEN-LAST:event_jLabelTetrisMousePressed
 
     private void jLabelTetrisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseReleased
-        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetrisE.jpg")));
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetrisE.jpg")));
         new Tetris();
     }//GEN-LAST:event_jLabelTetrisMouseReleased
 
     //BEENDEN Botton
     private void jLabelBeendenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseEntered
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenE.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonBeendenE.jpg")));
     }//GEN-LAST:event_jLabelBeendenMouseEntered
 
     private void jLabelBeendenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseExited
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonBeenden.jpg")));
     }//GEN-LAST:event_jLabelBeendenMouseExited
 
     private void jLabelBeendenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMousePressed
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenP.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonBeendenP.jpg")));
     }//GEN-LAST:event_jLabelBeendenMousePressed
 
     private void jLabelBeendenMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseReleased
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeendenE.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonBeendenE.jpg")));
         System.exit(0);
     }//GEN-LAST:event_jLabelBeendenMouseReleased
 
