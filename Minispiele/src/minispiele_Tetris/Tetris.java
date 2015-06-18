@@ -39,6 +39,8 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     private Image img;
     private int[][] spielflaeche;
     private TScore scores;
+    private TetrisFrame tetrisFrame;
+    private Thread thread;
 
     public Tetris() {
         //Initialisiert die einzelnen Komponenten
@@ -48,6 +50,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         ROTATION = KeyEvent.VK_UP;
         blockTest = new TBaustein(block.getID());
         scores = new TScore(new TBaustein(-1), new TBaustein(-1));
+
         //blockTest.setVisible(false);
         links = false;
         rechts = false;
@@ -59,11 +62,16 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         } catch (IOException ex) {
             Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            GUI();
-        } catch (IOException ex) {
-            Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        //GUI();
+        setOpaque(false);
+        setFocusable(true);
+        addKeyListener(this);
+        tetrisFrame = new TetrisFrame(this);        
+        thread = new Thread(this);
+        thread.start();
+        
+
     }
 
     private void initialisiereSpielflaeche() {
@@ -89,7 +97,6 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         setOpaque(false);
         setFocusable(true);
         addKeyListener(this);
-        new Thread(this).start();
 
     }
 
@@ -111,7 +118,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         gr.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
         gr.setColor(Color.WHITE);
         if (!start) {
-            
+
             for (int i = 0; i < spielflaeche.length; i++) {
                 for (int j = 0; j < spielflaeche[i].length; j++) {
                     if (spielflaeche[i][j] != -1 && start) {
