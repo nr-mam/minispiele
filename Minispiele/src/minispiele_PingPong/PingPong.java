@@ -67,7 +67,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
         System.out.println("Steuerung: W/S und Pfeil hoch/Pfeil runter");
         ball = new Ball(100, 100, this, schwierigkeit);
 
-        pframe = new PingPongFrame("PINGPONG --- MODUS: MULTIPLAYER", this, ball);
+        pframe = new PingPongFrame("PINGPONG --- MODUS: MULTIPLAYER", this);
         setSimilarities(spieler1);
         //Starten des Spieles
         thread = new Thread(this);
@@ -91,7 +91,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
         HOCH_SPIELER1 = KeyEvent.VK_UP;
         RUNTER_SPIELER1 = KeyEvent.VK_DOWN;
         ball = new Ball(100, 100, this, schwierigkeit);
-        pframe = new PingPongFrame("PINGPONG --- MODUS: SOLO", this, ball);
+        pframe = new PingPongFrame("PINGPONG --- MODUS: SOLO", this);
         setSimilarities(spieler1);
         //Starten des Spieles
         thread = new Thread(this);

@@ -22,7 +22,7 @@ public class PingPongFrame extends javax.swing.JFrame {
 
     private final String title;
     private final Component comp;
-    private final Ball ball;
+    
 
     /**
      * Erstellt das Frame vom PingPong Spiel.
@@ -30,15 +30,14 @@ public class PingPongFrame extends javax.swing.JFrame {
      * @param comp das Spiel an sich (JPanel)
      * @param ball der Spielball
      */
-    public PingPongFrame(String title, Component comp, Ball ball) {
+    public PingPongFrame(String title, Component comp) {
         initComponents();
         
-        this.ball = ball;
+        
         this.title = title;
         this.comp = comp;
         labelGewinnermeldung.setBackground(new Color(153, 153, 153, 100));
         labelGewinnermeldung.setVisible(false);
-
         layers.add(comp);
         comp.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
         layers.setLayer(comp, JLayeredPane.MODAL_LAYER);
