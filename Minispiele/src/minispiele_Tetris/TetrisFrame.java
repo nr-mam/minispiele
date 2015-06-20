@@ -16,17 +16,16 @@ import static minispiele_PingPong.PingPong.WIDTH_FIELD;
  */
 public class TetrisFrame extends javax.swing.JFrame {
 
-    private final Component comp;
+    private Component comp;
 
     /**
      * Creates new form TetrisFrame
      */
-    public TetrisFrame(Component comp) {
+    public TetrisFrame(Component compo) {
         initComponents();
-        this.comp = comp;        
+        this.comp = compo;        
         comp.setBounds(0, 0, WIDTH_FIELD, HEIGHT_FIELD);
         //layers.add(comp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 659));
-        
         //layers.setLayer(comp, JLayeredPane.MODAL_LAYER);
         add(comp);
         setVisible(true);
@@ -45,17 +44,33 @@ public class TetrisFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         layers = new javax.swing.JLayeredPane();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelBeenden = new javax.swing.JLabel();
+        jLabelNeuesSpiel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         layers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_end.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_end.jpg"))); // NOI18N
+        jLabelBeenden.setText("jLabel3");
+        jLabelBeenden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelBeendenMouseReleased(evt);
+            }
+        });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg"))); // NOI18N
+        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg"))); // NOI18N
+        jLabelNeuesSpiel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelNeuesSpielMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelNeuesSpielMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,9 +78,9 @@ public class TetrisFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(430, 430, 430)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNeuesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelBeenden, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(layers, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
@@ -74,20 +89,40 @@ public class TetrisFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(590, 590, 590)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelNeuesSpiel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBeenden, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabelBeendenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMousePressed
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_Beenden.jpg")));
+    }//GEN-LAST:event_jLabelBeendenMousePressed
+
+    private void jLabelBeendenMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseReleased
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_end.jpg")));
+        setVisible(false);
+    }//GEN-LAST:event_jLabelBeendenMouseReleased
+
+    private void jLabelNeuesSpielMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNeuesSpielMousePressed
+        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel_pressed.jpg")));
+    }//GEN-LAST:event_jLabelNeuesSpielMousePressed
+
+    private void jLabelNeuesSpielMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNeuesSpielMouseReleased
+       jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg")));
+       Tetris t = new Tetris();
+       comp = t;
+       setVisible(false);
+    }//GEN-LAST:event_jLabelNeuesSpielMouseReleased
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelBeenden;
+    private javax.swing.JLabel jLabelNeuesSpiel;
     private javax.swing.JLayeredPane layers;
     // End of variables declaration//GEN-END:variables
 }

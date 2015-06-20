@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import minispiele.Clock;
 
 /**
  *
@@ -34,13 +35,15 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     private TBaustein block = new TBaustein(-1);
     private TBaustein blockTest;
     private int LINKS_BEWEGUNG, RECHTS_BEWEGUNG, UNTEN_BEWEGUNG, ROTATION;
-    private boolean links, rechts, unten, rotieren, start;
+    boolean links, rechts, unten, rotieren, start, end;
     private final int GRENZE_UNTEN = 570, GRENZE_RECHTS = 360, GRENZE_LINKS = 30;
     private Image img;
+    private int wartezeit;
     private int[][] spielflaeche;
     private TScore scores;
     private TetrisFrame tetrisFrame;
-    private Thread thread;
+    public Thread thread;
+    private Clock c;
 
     public Tetris() {
         //Initialisiert die einzelnen Komponenten
@@ -49,12 +52,13 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         UNTEN_BEWEGUNG = KeyEvent.VK_DOWN;
         ROTATION = KeyEvent.VK_UP;
         blockTest = new TBaustein(block.getID());
+        c = new Clock();
         scores = new TScore(new TBaustein(-1), new TBaustein(-1));
-
         //blockTest.setVisible(false);
         links = false;
         rechts = false;
         start = true;
+        end = false;
         initialisiereSpielflaeche();
         try {
             img = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\TetrisFeld_Design_01.jpg"));
@@ -67,10 +71,9 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         setOpaque(false);
         setFocusable(true);
         addKeyListener(this);
-        tetrisFrame = new TetrisFrame(this);        
+        tetrisFrame = new TetrisFrame(this);
         thread = new Thread(this);
         thread.start();
-        
 
     }
 
@@ -118,23 +121,25 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         gr.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
         gr.setColor(Color.WHITE);
         if (!start) {
-
+            gr.drawString("GAME OVER", 55, 350);
             for (int i = 0; i < spielflaeche.length; i++) {
                 for (int j = 0; j < spielflaeche[i].length; j++) {
                     if (spielflaeche[i][j] != -1 && start) {
+                        System.out.println("did");
                         gr.drawImage(block.getImgs(spielflaeche[i][j]), (i * 30), ((j * 30) - 1), this);
                     }
                 }
 
             }
-            gr.drawString("GAME OVER", 55, 350);
+
+            end = true;
         }
 
     }
 
     @Override
     public void run() {
-        int wartezeit;
+        c.getT().start();
         int x = 0, y = 0, y1;
         int[] geprüft;
         boolean isOK;
@@ -142,7 +147,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         int[][] spielflaecheKopie;
         while (start) {
             isOK = true;
-            wartezeit = 65;
+            wartezeit = 65-((scores.getLevel()-1)*3);
 
             //Pfeiltaste nach oben wurde gedrückt.
             if (rotieren) {
@@ -181,7 +186,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             if (unten) {
                 block.moveBlockDown(GRENZE_UNTEN);
                 wartezeit = 20;
-                scores.ScoreAdd(10);
+                scores.ScoreAdd(10 * scores.getLevel());
             }
 
             geprüft = new int[block.getBlockForm()[0].length];
@@ -210,8 +215,13 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
 
             }
+            //Erhöhung des Levels, soblad die Bedinngungen dafür erfüllt sind.
+            System.out.println(c.getS());
+            if(c.getMin()>=1 && scores.getLines()>=scores.getLevel()*scores.getLines() && scores.getScore()>scores.getLevel()*5000){
+            scores.level++;
+            c.resetAll();
+            }
             // Ist der Block unten angekommen?
-
             if (isUnten) {
                 x = ((block.getY() / 30));
                 if (x < 2) {
@@ -236,7 +246,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
                 block = scores.neuerBaustein();
                 blockTest = new TBaustein(block.getID());
-                scores.ScoreAdd((block.getXmax() + 1) * (block.getYmax() + 1));
+                scores.ScoreAdd((block.getXmax() + 1) * (block.getYmax() + 1) * scores.getLevel());
 
                 isLine = false;
                 int c = 0;
@@ -249,7 +259,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                             if (c == 12) {
 
                                 scores.LinesAdd(1);
-                                scores.ScoreAdd(200);
+                                scores.ScoreAdd(200*scores.getLevel());
 
                                 spielflaecheKopie = new int[spielflaeche.length][spielflaeche[0].length];
                                 for (int k = 0; k < spielflaeche.length; k++) {
@@ -285,6 +295,9 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             }
             repaint();
         }
+        while (!end) {
+            repaint();
+        }
 
     }
 
@@ -315,6 +328,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 block.moveBlockLeft(GRENZE_LINKS);
                 try {
                     Thread.sleep(15);
+                    wartezeit = 45;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -346,6 +360,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 block.moveBlockRight(GRENZE_RECHTS);
                 try {
                     Thread.sleep(15);
+                    wartezeit = 45;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
                 }

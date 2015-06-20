@@ -19,7 +19,7 @@ import javax.swing.JComponent;
  */
 public class TScore extends JComponent {
 
-    private int score, lines;
+    int score, lines, level;
     private TBaustein baustein1, baustein2;
 
     public TScore(TBaustein b1, TBaustein b2) {
@@ -27,6 +27,7 @@ public class TScore extends JComponent {
         baustein1 = b1;
         baustein2 = b2;
         lines = 0;
+        level = 1;
     }
 
     @Override
@@ -41,22 +42,39 @@ public class TScore extends JComponent {
         }
         gr.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
         gr.setColor(Color.WHITE);
-        int x = (Integer.toString(score).length()*10 + Integer.toString(score).length()*4);
-        gr.drawString(Integer.toString(score), (675-x), 400);
-        x = (Integer.toString(lines).length()*10 + Integer.toString(lines).length()*4);
-        gr.drawString(Integer.toString(lines), (675-x), 467);
+        int x = (Integer.toString(score).length() * 10 + Integer.toString(score).length() * 4);
+        gr.drawString(Integer.toString(score), (675 - x), 400);
+        x = (Integer.toString(lines).length() * 10 + Integer.toString(lines).length() * 4);
+        gr.drawString(Integer.toString(lines), (675 - x), 467);
+        x = (Integer.toString(level).length() * 10 + Integer.toString(level).length() * 4);
+        gr.drawString(Integer.toString(level), (675 - x), 534);
+
+        
+    }
+
+    public void ScoreAdd(int a) {
+        score = score + a;
 
     }
-    
-    public void ScoreAdd(int a){
-        score = score + a;
-    
-    }
-    
-    public void LinesAdd(int a){
+
+    public void LinesAdd(int a) {
         lines = lines + a;
-    
+
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getLines() {
+        return lines;
+    }
+    
+    
 
     public TBaustein neuerBaustein() {
         TBaustein bausteinNext = baustein1;

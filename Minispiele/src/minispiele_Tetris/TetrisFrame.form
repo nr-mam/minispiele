@@ -18,7 +18,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-109,0,0,2,-18"/>
   </AuxValues>
 
   <Layout>
@@ -26,9 +25,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="430" pref="430" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="130" max="-2" attributes="0"/>
+              <Component id="jLabelNeuesSpiel" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" pref="130" max="-2" attributes="0"/>
+              <Component id="jLabelBeenden" min="-2" pref="130" max="-2" attributes="0"/>
           </Group>
           <Component id="layers" min="-2" pref="750" max="-2" attributes="0"/>
       </Group>
@@ -39,8 +38,8 @@
           <Group type="102" attributes="0">
               <EmptySpace min="590" pref="590" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jLabelNeuesSpiel" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jLabelBeenden" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -53,20 +52,28 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jLabelBeenden">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/Tetris_img/Botton_end.jpg"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel3"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelBeendenMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelBeendenMouseReleased"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="jLabelNeuesSpiel">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/Tetris_img/Botton_neuesSpiel.jpg"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNeuesSpielMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelNeuesSpielMouseReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
