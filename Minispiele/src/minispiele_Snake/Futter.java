@@ -32,14 +32,15 @@ public class Futter extends JComponent {
         position();
 
     }
-    public void position(){
-        xCoordinate = 10+10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10));
-        yCoordinate = 10+10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
-                
+
+    public void position() {
+        xCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_WIDTH / 10 - 10));
+        yCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_HEIGHT / 10 - 10));
+
     }
+
     public void paintComponent(Graphics gr) {
         gr.drawImage(imgEat, xCoordinate, yCoordinate, this);
-        
 
     }
 
@@ -50,6 +51,5 @@ public class Futter extends JComponent {
     public int getyCoordinate() {
         return yCoordinate;
     }
-    
 
 }

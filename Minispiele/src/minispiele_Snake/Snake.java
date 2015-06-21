@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,20 +26,20 @@ import minispiele_Tetris.Tetris;
  */
 public class Snake extends JPanel implements Runnable, KeyListener {
 
-    public final static int WIDTH_FRAME = 1200, HEIGHT_FRAME = 700;
+    public final static int FRAME_WIDTH = 1200, FRAME_HEIGHT = 700;
     public final static int WIDTH_FIELD = 1180, HEIGHT_FIELD = 680;
     public int vStart = 100; // Geschwindigkeit
     private Image imgField;
     private int width, height;
-    private int playingField[][];
     private SnakeKopf head = new SnakeKopf();
     private Futter eat = new Futter();
     private int tempo;
     private boolean left, right, up, down;
-    public boolean gameover = false;
+    public boolean gameover1 = false;
     public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
+    public ArrayList<SnakeTail> taillistarray = new ArrayList<>();
 
     //TODO
     public Snake() {
@@ -70,23 +71,32 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        first.paintComponent(gr);
-        
+        if (taillistarray.size() > 1) {
+            for (int i = 0; i < taillistarray.size(); i++) {
+                taillistarray.get(i).paintComponent(gr);
 
+            }
+        }
+
+        //first.paintComponent(gr);
     }
 
     @Override
     public void run() {
-        int i = 0;
+        int i = 1;
+        taillistarray.clear();
 
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
+        SnakeTail first = new SnakeTail(head.getxCoordinate(), head.getyCoordinate());
+        taillistarray.add(0, first);
+        int x = 0;
+        int y = 0;
 
         while (true) {
 
-            first = new Tail(head.getxCoordinate(), head.getyCoordinate());
-
+            //first = new Tail(head.getxCoordinate(), head.getyCoordinate());
             speed = vStart;
             if (head.isRIGHT()) {
                 head.moveHeadRight();
@@ -100,32 +110,43 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             if (head.isUP()) {
                 head.moveHeadUp();
             }
-            if (head.getxCoordinate() == eat.getxCoordinate()
-                    && head.getyCoordinate() == eat.getyCoordinate()) {
+            first.setxCoordinate(head.xCoordinate);
+            first.setyCoordinate(head.yCoordinate);
+            update();
+            if (head.getxCoordinate() == eat.getxCoordinate() && head.getyCoordinate() == eat.getyCoordinate()) {
                 score();
-                first.add();
+                //first.add();
+                taillistarray.add(i, new SnakeTail(x, y));
+                update();
 
             }
 
-            repaint();
             try {
                 Thread.sleep(speed);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (gameover == true) {
+            if (gameover1 == true) {
                 break;
             }
-            first.update(first.getxCoordinate(), first.getyCoordinate());
+            if (taillistarray.size() < 1) {
+                x = head.getxCoordinate();
+                y = head.getyCoordinate();
+            } else {
+                x = taillistarray.get(taillistarray.size() - 1).getxCoordinate();
+                y = taillistarray.get(taillistarray.size() - 1).getyCoordinate();
+            }
+            update();
             
+            repaint();
 
-            
+            //first.update(first.getxCoordinate(), first.getyCoordinate());
         }
 
     }
 
     public void setGameover(boolean gameover) {
-        this.gameover = gameover;
+        gameover1 = gameover;
     }
 
     @Override
@@ -151,7 +172,13 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     }
 
     public void update() {
-        first.update(first.getxCoordinate(), first.getyCoordinate());
+        //first.update(first.getxCoordinate(), first.getyCoordinate());
+        if (taillistarray.size() > 0) {
+            for (int i = 1; i < taillistarray.size(); i++) {
+                taillistarray.set(taillistarray.size() - (i), taillistarray.get(taillistarray.size() - (1 + i)));
+
+            }
+        }
 
     }
 

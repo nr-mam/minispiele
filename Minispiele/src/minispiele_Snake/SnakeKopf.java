@@ -26,8 +26,8 @@ public class SnakeKopf extends JComponent{
     private int MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP;
     private int movingDirection;
     private boolean LEFT = false, RIGHT = false, UP = false, DOWN = false;
-    public int xCoordinate =  10 * (int)((Math.random())*(Snake.WIDTH_FIELD/10 -10)),
-            yCoordinate = 10 * (int)((Math.random())*(Snake.HEIGHT_FIELD/10 -10));
+    public int xCoordinate =  10 * (int)((Math.random())*(Snake.FRAME_WIDTH/10 -10)),
+            yCoordinate = 10 * (int)((Math.random())*(Snake.FRAME_HEIGHT/10 -10));
     public Snake snake;
     public LinkedList<Tail> tail = new LinkedList<>();
     public int previousxCoordinate, previousyCoordinate; 
