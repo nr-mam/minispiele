@@ -112,7 +112,7 @@ public class TetrisFrame extends javax.swing.JFrame {
     private void jLabelNeuesSpielMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNeuesSpielMouseReleased
        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg")));
        Tetris t = new Tetris();
-       comp = t;
+       //comp = t;
        setVisible(false);
     }//GEN-LAST:event_jLabelNeuesSpielMouseReleased
 
