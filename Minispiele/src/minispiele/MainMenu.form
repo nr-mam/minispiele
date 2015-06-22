@@ -28,7 +28,7 @@
     <Component class="javax.swing.JLabel" name="jLabelSnake">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/BottonSnake.jpg"/>
+          <Image iconType="3" name="/images/MainMenu/BottonSnake.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -46,7 +46,7 @@
     <Component class="javax.swing.JLabel" name="jLabelTetris">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/BottonTetris.jpg"/>
+          <Image iconType="3" name="/images/MainMenu/BottonTetris.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -64,7 +64,7 @@
     <Component class="javax.swing.JLabel" name="jLabelBeenden">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/BottonBeenden.jpg"/>
+          <Image iconType="3" name="/images/MainMenu/BottonBeenden.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -82,7 +82,7 @@
     <Component class="javax.swing.JLabel" name="jLabelPingPong">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/BottonPingPong.jpg"/>
+          <Image iconType="3" name="/images/MainMenu/BottonPingPong.jpg"/>
         </Property>
       </Properties>
       <Events>

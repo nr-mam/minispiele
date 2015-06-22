@@ -50,7 +50,7 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonSnake.jpg"))); // NOI18N
+        jLabelSnake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonSnake.jpg"))); // NOI18N
         jLabelSnake.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelSnakeMouseEntered(evt);
@@ -67,7 +67,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelSnake, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 520, -1));
 
-        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonTetris.jpg"))); // NOI18N
+        jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetris.jpg"))); // NOI18N
         jLabelTetris.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelTetrisMouseEntered(evt);
@@ -84,7 +84,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelTetris, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 440, 520, 90));
 
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonBeenden.jpg"))); // NOI18N
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonBeenden.jpg"))); // NOI18N
         jLabelBeenden.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelBeendenMouseEntered(evt);
@@ -101,7 +101,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(jLabelBeenden, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 550, 520, -1));
 
-        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BottonPingPong.jpg"))); // NOI18N
+        jLabelPingPong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonPingPong.jpg"))); // NOI18N
         jLabelPingPong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelPingPongMouseEntered(evt);
