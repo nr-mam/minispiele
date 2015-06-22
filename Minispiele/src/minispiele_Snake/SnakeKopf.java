@@ -5,6 +5,7 @@
  */
 package minispiele_Snake;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -19,21 +20,34 @@ import javax.swing.JComponent;
  *
  * @author nmamerow
  */
-public class SnakeKopf extends JComponent{
+public class SnakeKopf extends JComponent {
 
     private Image imgFragment;
     //private int size = pictureSnakeSize();
-    private int MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP;
-    private int movingDirection;
+    private final int MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP;
+    private int movingDirection;//1 = up; 2 = right; 3 = down; 4 = left
     private boolean LEFT = false, RIGHT = false, UP = false, DOWN = false;
-    public int xCoordinate =  10 * (int)((Math.random())*(Snake.FRAME_WIDTH/10 -10)),
-            yCoordinate = 10 * (int)((Math.random())*(Snake.FRAME_HEIGHT/10 -10));
+    //public int xCoordinate = 10 * (int) ((Math.random()) * (Snake.FRAME_WIDTH / 10 - 10)),
+    //        yCoordinate = 10 * (int) ((Math.random()) * (Snake.FRAME_HEIGHT / 10 - 10));
     public Snake snake;
     public LinkedList<Tail> tail = new LinkedList<>();
-    public int previousxCoordinate, previousyCoordinate; 
-    public int taillengt = 0;
+    public int previousxCoordinate, previousyCoordinate;
+    public int taillengt;
+    private int[] xPixel = new int[840000];
+    private int[] yPixel = new int[840000];
+    private Component comp;
+    private boolean gameover;
+    
 
-    public SnakeKopf() {
+    public SnakeKopf(int taillenght, Component comp) {
+        this.taillengt = taillenght;
+        this.comp = comp;
+        for (int i = 0; i < taillenght; i++) {
+            xPixel[i] = 100 - i * 10;
+            yPixel[i] = 100;
+
+        }
+
         try {
             imgFragment = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFragment.jpg"));
 
@@ -44,15 +58,19 @@ public class SnakeKopf extends JComponent{
         MOVE_RIGHT = KeyEvent.VK_RIGHT;
         MOVE_DOWN = KeyEvent.VK_DOWN;
         MOVE_UP = KeyEvent.VK_UP;
+        
+
     }
 
-    /*private int pictureSnakeSize() {
-        if (imgFragment.getHeight(null) != imgFragment.getWidth(null)) {
-            throw new NumberFormatException("Das Bild ist nicht quadratisch.");
+    @Override
+    public void paintComponent(Graphics gr) {
+        for (int i = 0; i <= taillengt; i++) {
+            gr.drawImage(imgFragment, xPixel[i], yPixel[i], comp);
+
         }
-        return imgFragment.getHeight(null);
+        //gr.drawImage(imgFragment, xCoordinate, yCoordinate, this);
+
     }
-    */
 
     public int getMovingDirection() {
         return movingDirection;
@@ -60,34 +78,35 @@ public class SnakeKopf extends JComponent{
 
     public void move(int keyCode) {
         int key = keyCode;
-        if (key == MOVE_LEFT) {
+        if (key == MOVE_LEFT && movingDirection != 2) {
             LEFT = true;
             RIGHT = false;
             UP = false;
             DOWN = false;
 
         }
-        if (key == MOVE_RIGHT) {
+        if (key == MOVE_RIGHT && movingDirection != 4) {
             LEFT = false;
             RIGHT = true;
             UP = false;
             DOWN = false;
 
         }
-        if (key == MOVE_DOWN) {
+        if (key == MOVE_DOWN && movingDirection != 1) {
             LEFT = false;
             RIGHT = false;
             UP = false;
             DOWN = true;
 
         }
-        if (key == MOVE_UP) {
+        if (key == MOVE_UP && movingDirection != 3) {
             LEFT = false;
             RIGHT = false;
             UP = true;
             DOWN = false;
         }
         
+
     }
 
     public boolean isLEFT() {
@@ -106,56 +125,84 @@ public class SnakeKopf extends JComponent{
         return DOWN;
     }
 
-    public void moveHeadUp() {
-        previousyCoordinate = yCoordinate;
-        if (yCoordinate - 10 > 0) {
-            yCoordinate -= 10;
-        } else {
-            snake.setGameover(true);
+    public void moveHead() {
+        for (int i = taillengt; i > 0; i--) {
+            xPixel[i] = xPixel[(i - 1)];
+            yPixel[i] = yPixel[(i - 1)];
+        }
+        if (movingDirection == 1) {
+            if (yPixel[0] - 10 > 0) {
+                yPixel[0] -= 10;
+            } else {
+                //snake.setGameover(true);
+            }
+        }
+        if (movingDirection == 2) {
+            if (xPixel[0] + 10 < snake.WIDTH_FIELD + 10) {
+                xPixel[0] += 10;
+            } else {
+                //snake.setGameover(true);
+            }
+        }
+        if (movingDirection == 3) {
+            if (yPixel[0] + 10 < snake.HEIGHT_FIELD + 10) {
+                yPixel[0] += 10;
+            } else {
+                //snake.setGameover(true);
+            }
+        }
+        if (movingDirection == 4) {
+            if (xPixel[0] - 10 > 0) {
+                xPixel[0] -= 10;
+            } else {
+                //snake.setGameover(true);;
+            }
+
         }
 
     }
 
-    public void moveHeadDown() {
-        previousyCoordinate = yCoordinate;
-        if (yCoordinate + 10 < snake.HEIGHT_FIELD+10) {
-            yCoordinate += 10;
-        } else {
-            snake.setGameover(true);
-        }
-        
-                
+    /*public void moveHeadUp() {
+     //previousyCoordinate = yCoordinate;
+     if (yPixel[0] - 10 > 0) {
+     yPixel[0] -= 10;
+     } else {
+     snake.setGameover(true);
+     }
 
-    }
+     }
 
-    public void moveHeadLeft() {
-        previousxCoordinate = xCoordinate;
-        if (xCoordinate - 10 > 0) {
-            xCoordinate -= 10;
-        } else {
-            snake.setGameover(true);;
-        }
-    }
+     public void moveHeadDown() {
+     //previousyCoordinate = yCoordinate;
+     if (yPixel[0] + 10 < snake.HEIGHT_FIELD + 10) {
+     yPixel[0] += 10;
+     } else {
+     snake.setGameover(true);
+     }
 
-    public void moveHeadRight() {
-        previousxCoordinate = xCoordinate;
-        if (xCoordinate + 10 < snake.WIDTH_FIELD +10) {
-            xCoordinate += 10;
-        } else {
-            snake.setGameover(true);
-        }
+     }
 
-    }
+     public void moveHeadLeft() {
+     //previousxCoordinate = xCoordinate;
+     if (xPixel[0] - 10 > 0) {
+     xPixel[0] -= 10;
+     } else {
+     snake.setGameover(true);;
+     }
+     }
 
+     public void moveHeadRight() {
+     //previousxCoordinate = xCoordinate;
+     if (xPixel[0] + 10 < snake.WIDTH_FIELD + 10) {
+     xPixel[0] += 10;
+     } else {
+     snake.setGameover(true);
+     }
+
+     }*/
     //public int getSizeHead() {
     //    return size;
     //}
-    public void paintComponent(Graphics gr) {
-        gr.drawImage(imgFragment, xCoordinate, yCoordinate, this);
-        
-
-    }
-
     public void setLEFT(boolean LEFT) {
         this.LEFT = LEFT;
     }
@@ -171,25 +218,63 @@ public class SnakeKopf extends JComponent{
     public void setDOWN(boolean DOWN) {
         this.DOWN = DOWN;
     }
-    public void tailAdd(){
-        Tail t = new Tail(previousxCoordinate,previousyCoordinate);
+
+    public void tailAdd() {
+        Tail t = new Tail(previousxCoordinate, previousyCoordinate);
         tail.add(t);
         taillengt++;
-        
+
     }
 
     public int getTaillengt() {
         return taillengt;
     }
 
-    public int getxCoordinate() {
-        return xCoordinate;
+    //public int getxCoordinate() {
+    //    return xCoordinate;
+    //}
+    //public int getyCoordinate() {
+    //    return yCoordinate;
+    //}
+    public void setMovingDirection(int movingDirection) {
+        this.movingDirection = movingDirection;
     }
 
-    public int getyCoordinate() {
-        return yCoordinate;
+    public int getxPixel() {
+        return xPixel[0];
     }
-    
-    
+
+    public int getyPixel() {
+        return yPixel[0];
+    }
+
+    public void setTaillengt(int taillengt) {
+        this.taillengt = taillengt;
+    }
+
+    public void collision() {
+        if (xPixel[0] <= 10) {
+            gameover = true;
+        }
+        if (xPixel[0] >= Snake.WIDTH_FIELD) {
+            gameover = true;
+        }
+        if (yPixel[0] <= 10) {
+            gameover = true;
+        }
+        if (yPixel[0] >= Snake.HEIGHT_FIELD) {
+            gameover = true;
+        }
+        for (int i = 1; i <= taillengt; i++) {
+            if(xPixel[0]==xPixel[i] && yPixel[0]== yPixel[i]){
+                gameover = true;
+            }
+            
+        }
+    }
+
+    boolean getGameover() {
+       return gameover;
+    }
 
 }

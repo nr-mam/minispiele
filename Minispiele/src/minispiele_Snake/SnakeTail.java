@@ -22,6 +22,7 @@ public class SnakeTail extends JComponent{
     private Image imgTail;
     private int xCoordinate, yCoordinate;
     private SnakeKopf head;
+    public int numberOfTails;
 
     public SnakeTail(int x, int y) {
         try {
@@ -32,6 +33,7 @@ public class SnakeTail extends JComponent{
         imgTail = this.imgTail;
         xCoordinate = x;
         yCoordinate = y;
+       
         repaint();
         
         
@@ -40,6 +42,9 @@ public class SnakeTail extends JComponent{
 
     @Override
     protected void paintComponent(Graphics gr) {
+        for (int i = 0; i < numberOfTails; i++) {
+            gr.drawImage(imgTail, xCoordinate + i *10, yCoordinate, this);
+        }
         gr.drawImage(imgTail, xCoordinate, yCoordinate, this);
     }
 
@@ -58,6 +63,14 @@ public class SnakeTail extends JComponent{
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
+
+    public void setNumberOfTails(int number) {
+        this.numberOfTails = number;
+    }
+    
+
+   
+    
     
     
     

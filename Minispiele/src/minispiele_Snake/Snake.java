@@ -6,6 +6,7 @@
 package minispiele_Snake;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.paint.Color;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,22 +32,43 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public final static int WIDTH_FIELD = 1180, HEIGHT_FIELD = 680;
     public int vStart = 100; // Geschwindigkeit
     private Image imgField;
+    private Image ImgGameOver;
     private int width, height;
-    private SnakeKopf head = new SnakeKopf();
+    public int tail = 2;
+    private SnakeKopf head = new SnakeKopf(tail, this);
     private Futter eat = new Futter();
-    private int tempo;
-    private boolean left, right, up, down;
     public boolean gameover1 = false;
-    public Tail first;
+    //public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
+    //public int number = 1;
     public ArrayList<SnakeTail> taillistarray = new ArrayList<>();
+    public int snakeColor;//1 = rot; 2 = blau; 3 = lila
+    public int eatColor; //1 = blau; 2 = gelb; 3 = lila
+
+    public void setvStart(int vStart) {
+        this.vStart = vStart;
+    }
+
+    public void setEatColor(int eatColor) {
+        this.eatColor = eatColor;
+    }
+
+    public void setSnakeColor(int snakeColor) {
+        this.snakeColor = snakeColor;
+    }
 
     //TODO
     public Snake() {
+        try {
+            ImgGameOver = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\GameOver.jpg"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try {
-            imgField = ImageIO.read(this.getClass().getResource("..\\images\\SnakeSpielfeld.png"));
+            imgField = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeSpielfeld.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,53 +94,59 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        if (taillistarray.size() > 1) {
-            for (int i = 0; i < taillistarray.size(); i++) {
-                taillistarray.get(i).paintComponent(gr);
-
-            }
+        if(head.getGameover() == true){
+            gr.drawImage(ImgGameOver, FRAME_WIDTH/2-250, FRAME_HEIGHT/2-75, this);
         }
+        Font f = new Font("Score", Font.ITALIC, 12);
+        gr.setFont(new Font("Score", Font.ITALIC, 12));
+        gr.drawString("Score: " + (score * 100), 10, 10);
 
         //first.paintComponent(gr);
     }
 
     @Override
     public void run() {
-        int i = 1;
+        //int i = 1;
         taillistarray.clear();
 
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
-        SnakeTail first = new SnakeTail(head.getxCoordinate(), head.getyCoordinate());
-        taillistarray.add(0, first);
+        //SnakeTail first = new SnakeTail(head.getxCoordinate(), head.getyCoordinate());
+        //taillistarray.add(0, first);
         int x = 0;
         int y = 0;
 
         while (true) {
 
-            //first = new Tail(head.getxCoordinate(), head.getyCoordinate());
             speed = vStart;
-            if (head.isRIGHT()) {
-                head.moveHeadRight();
-            }
-            if (head.isDOWN()) {
-                head.moveHeadDown();
-            }
-            if (head.isLEFT()) {
-                head.moveHeadLeft();
-            }
-            if (head.isUP()) {
-                head.moveHeadUp();
-            }
-            first.setxCoordinate(head.xCoordinate);
-            first.setyCoordinate(head.yCoordinate);
-            update();
-            if (head.getxCoordinate() == eat.getxCoordinate() && head.getyCoordinate() == eat.getyCoordinate()) {
-                score();
-                //first.add();
-                taillistarray.add(i, new SnakeTail(x, y));
-                update();
+            head.collision();
+            if (head.getGameover() == false) {
+                if (head.isRIGHT()) {
+                    head.setMovingDirection(2);
+
+                }
+                if (head.isDOWN()) {
+                    head.setMovingDirection(3);
+
+                }
+                if (head.isLEFT()) {
+                    head.setMovingDirection(4);
+
+                }
+                if (head.isUP()) {
+                    head.setMovingDirection(1);
+
+                }
+                head.moveHead();
+
+                if (head.getxPixel() == eat.getxCoordinate() && head.getyPixel() == eat.getyCoordinate()) {
+                    tail += 5;
+                    score();
+                    head.setTaillengt(tail);
+
+                }
+                
 
             }
 
@@ -126,21 +155,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (gameover1 == true) {
-                break;
-            }
-            if (taillistarray.size() < 1) {
-                x = head.getxCoordinate();
-                y = head.getyCoordinate();
-            } else {
-                x = taillistarray.get(taillistarray.size() - 1).getxCoordinate();
-                y = taillistarray.get(taillistarray.size() - 1).getyCoordinate();
-            }
-            update();
-            
             repaint();
-
-            //first.update(first.getxCoordinate(), first.getyCoordinate());
         }
 
     }
