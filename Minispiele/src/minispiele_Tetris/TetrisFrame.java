@@ -32,7 +32,7 @@ public class TetrisFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        
+        setSize(750, 685);
     }
 
     /**
