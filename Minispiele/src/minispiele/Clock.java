@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Diese Klasse erstellt eine Stoppuhr, die dann startet, wenn der Thread 
+ * gestartet wird.
  *
  * @author Marc
  */
@@ -17,6 +19,7 @@ public class Clock implements Runnable {
     private Thread t;
     private int h, min, s, ms;
     private boolean stop, end;
+    
 
     public Clock() {
         stop = false;
@@ -32,6 +35,7 @@ public class Clock implements Runnable {
     public void run() {
         boolean doSchleife = true;
 
+        //Die Stoppuhr wird gestartet
         while (doSchleife) {
             try {
                 t.sleep(10);
@@ -60,6 +64,7 @@ public class Clock implements Runnable {
         }
     }
 
+    //Setzt den Timer wieder auf 0
     public void resetAll() {
         h = 0;
         min = 0;
@@ -87,12 +92,16 @@ public class Clock implements Runnable {
         return ms;
     }
 
+    //Stoppt/ Setzt den Timer fort
+    // true - fortsetzten
+    // false - stoppen
     public void setStop(boolean stop) {
         this.stop = stop;
     }
 
-    public void setEnd(boolean end) {
-        this.end = end;
+    //Beendet die Stoppuhr
+    public void setEnd() {
+        end = true;
     }
     
 
