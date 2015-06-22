@@ -29,6 +29,7 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         setLocationRelativeTo(null);
         setResizable(false);
+        setSize(1080, 726);
 
     }
 
