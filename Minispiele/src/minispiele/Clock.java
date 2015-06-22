@@ -44,15 +44,15 @@ public class Clock implements Runnable {
             }
             if (!stop) {
                 ms += 10;
-                if (ms == 1000) {
+                if (ms >= 1000) {
                     s += 1;
                     ms = 0;
                 }
-                if (s == 60) {
+                if (s >= 60) {
                     min += 1;
                     s = 0;
                 }
-                if (min == 60) {
+                if (min >= 60) {
                     h += 1;
                     min = 0;
                 }

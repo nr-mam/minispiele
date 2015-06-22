@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import minispiele_PingPong.Einstellungen;
 import minispiele_Snake.Snake;
 import minispiele_Tetris.Tetris;
+import minispiele_Tetris.TetrisSteuerung;
 
 /**
  *
@@ -174,7 +175,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jLabelTetrisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTetrisMouseReleased
         jLabelTetris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainMenu/BottonTetrisE.jpg")));
-        new Tetris();
+        new TetrisSteuerung();
     }//GEN-LAST:event_jLabelTetrisMouseReleased
 
     //BEENDEN Botton
