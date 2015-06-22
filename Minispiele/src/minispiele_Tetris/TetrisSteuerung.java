@@ -19,6 +19,7 @@ public class TetrisSteuerung extends javax.swing.JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+        setSize(560, 350);
     }
 
     /**
