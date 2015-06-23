@@ -28,8 +28,8 @@ import minispiele_Tetris.Tetris;
  */
 public class Snake extends JPanel implements Runnable, KeyListener {
 
-    public final static int FRAME_WIDTH = 1200, FRAME_HEIGHT = 700;
-    public final static int WIDTH_FIELD = 1180, HEIGHT_FIELD = 680;
+    public final static int FRAME_WIDTH_1 = 500, FRAME_HEIGHT_1 = 500;
+    public final static int WIDTH_FIELD_1 = 480, HEIGHT_FIELD_1 = 480;
     public int vStart = 100; // Geschwindigkeit
     private Image imgField;
     private Image ImgGameOver;
@@ -61,14 +61,14 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     //TODO
     public Snake() {
         try {
-            ImgGameOver = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\GameOver.jpg"));
+            ImgGameOver = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\GameOver_1.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-            imgField = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeSpielfeld.jpg"));
+            imgField = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SpielfeldKlein.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +95,7 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         head.paintComponent(gr);
         eat.paintComponent(gr);
         if(head.getGameover() == true){
-            gr.drawImage(ImgGameOver, FRAME_WIDTH/2-250, FRAME_HEIGHT/2-75, this);
+            gr.drawImage(ImgGameOver, FRAME_WIDTH_1/2-240, FRAME_HEIGHT_1/2-75, this);
         }
         Font f = new Font("Score", Font.ITALIC, 12);
         gr.setFont(new Font("Score", Font.ITALIC, 12));

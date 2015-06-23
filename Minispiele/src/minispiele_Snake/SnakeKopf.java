@@ -138,14 +138,14 @@ public class SnakeKopf extends JComponent {
             }
         }
         if (movingDirection == 2) {
-            if (xPixel[0] + 10 < snake.WIDTH_FIELD + 10) {
+            if (xPixel[0] + 10 < snake.WIDTH_FIELD_1 + 10) {
                 xPixel[0] += 10;
             } else {
                 //snake.setGameover(true);
             }
         }
         if (movingDirection == 3) {
-            if (yPixel[0] + 10 < snake.HEIGHT_FIELD + 10) {
+            if (yPixel[0] + 10 < snake.HEIGHT_FIELD_1 + 10) {
                 yPixel[0] += 10;
             } else {
                 //snake.setGameover(true);
@@ -256,13 +256,13 @@ public class SnakeKopf extends JComponent {
         if (xPixel[0] <= 10) {
             gameover = true;
         }
-        if (xPixel[0] >= Snake.WIDTH_FIELD) {
+        if (xPixel[0] >= Snake.WIDTH_FIELD_1) {
             gameover = true;
         }
         if (yPixel[0] <= 10) {
             gameover = true;
         }
-        if (yPixel[0] >= Snake.HEIGHT_FIELD) {
+        if (yPixel[0] >= Snake.HEIGHT_FIELD_1) {
             gameover = true;
         }
         for (int i = 1; i <= taillengt; i++) {

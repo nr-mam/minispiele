@@ -34,8 +34,8 @@ public class Futter extends JComponent {
     }
 
     public void position() {
-        xCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_WIDTH / 10 - 10));
-        yCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_HEIGHT / 10 - 10));
+        xCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_WIDTH_1 / 10 - 10));
+        yCoordinate = 10 + 10 * (int) ((Math.random()) * (Snake.FRAME_HEIGHT_1 / 10 - 10));
 
     }
 
