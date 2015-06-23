@@ -195,7 +195,10 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 scores.level++;
                 c.resetAll();
             }
+            
+            //untenTesten(isUnten);
             // Ist der Block unten angekommen?
+            
             if (isUnten) {
                 x = ((block.getY() / 30));
                 if (x < 2) {
@@ -262,6 +265,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
 
             }
+            
             try {
                 Thread.sleep(wartezeit);
             } catch (InterruptedException ex) {
@@ -376,6 +380,26 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         }
 
     }
+    
+    private void untenTesten(int x, int y, boolean isUnten, boolean isOK) {
+        if(isUnten){
+        blockTest.X = block.getX() + 30;
+            blockTest.Y = block.getY();
+            isOK = true;
+            for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+                for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                    x = (((blockTest.getX() / 30) + i));
+                    y = (((blockTest.getY() / 30) + j));
+                    if (blockTest.getBlockForm()[i][j] == 1) {
+                        if (spielflaeche[x][y] != -1) {
+                            isOK = false;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -405,5 +429,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         unten = false;
         rotieren = false;
     }
+
+    
 
 }
