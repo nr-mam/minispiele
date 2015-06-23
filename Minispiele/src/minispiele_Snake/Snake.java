@@ -38,10 +38,8 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     private SnakeKopf head = new SnakeKopf(tail, this);
     private Futter eat = new Futter();
     public boolean gameover1 = false;
-    //public Tail first;
     public LinkedList<Tail> taillist = new LinkedList<>();
     public int score = 0;
-    //public int number = 1;
     public ArrayList<SnakeTail> taillistarray = new ArrayList<>();
     public int snakeColor;//1 = rot; 2 = blau; 3 = lila
     public int eatColor; //1 = blau; 2 = gelb; 3 = lila
@@ -57,8 +55,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     public void setSnakeColor(int snakeColor) {
         this.snakeColor = snakeColor;
     }
-
-    //TODO
     public Snake() {
         try {
             ImgGameOver = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\GameOver_1.jpg"));
@@ -94,14 +90,12 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         gr.drawImage(imgField, 0, 0, this);
         head.paintComponent(gr);
         eat.paintComponent(gr);
-        if(head.getGameover() == true){
-            gr.drawImage(ImgGameOver, FRAME_WIDTH_1/2-240, FRAME_HEIGHT_1/2-75, this);
+        if (head.getGameover() == true) {
+            gr.drawImage(ImgGameOver, FRAME_WIDTH_1 / 2 - 240, FRAME_HEIGHT_1 / 2 - 75, this);
         }
         Font f = new Font("Score", Font.ITALIC, 12);
         gr.setFont(new Font("Score", Font.ITALIC, 12));
         gr.drawString("Score: " + (score * 100), 10, 10);
-
-        //first.paintComponent(gr);
     }
 
     @Override
@@ -112,8 +106,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
         setGameover(false);
         int speed = vStart;
         head.setRIGHT(true);
-        //SnakeTail first = new SnakeTail(head.getxCoordinate(), head.getyCoordinate());
-        //taillistarray.add(0, first);
         int x = 0;
         int y = 0;
 
@@ -146,7 +138,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
                     head.setTaillengt(tail);
 
                 }
-                
 
             }
 
@@ -187,7 +178,6 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     }
 
     public void update() {
-        //first.update(first.getxCoordinate(), first.getyCoordinate());
         if (taillistarray.size() > 0) {
             for (int i = 1; i < taillistarray.size(); i++) {
                 taillistarray.set(taillistarray.size() - (i), taillistarray.get(taillistarray.size() - (1 + i)));
