@@ -26,7 +26,7 @@ public class SnakeTail extends JComponent{
 
     public SnakeTail(int x, int y) {
         try {
-            imgTail = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFragment.jpg"));
+            imgTail = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeFragment.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(SnakeTail.class.getName()).log(Level.SEVERE, null, ex);
         }
