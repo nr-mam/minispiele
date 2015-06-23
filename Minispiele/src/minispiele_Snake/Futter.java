@@ -25,7 +25,7 @@ public class Futter extends JComponent {
 
     public Futter() {
         try {
-            imgEat = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFutter.jpg"));
+            imgEat = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeFutter.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(Futter.class.getName()).log(Level.SEVERE, null, ex);
         }

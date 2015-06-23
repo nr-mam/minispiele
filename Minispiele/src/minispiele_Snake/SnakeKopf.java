@@ -49,7 +49,7 @@ public class SnakeKopf extends JComponent {
         }
 
         try {
-            imgFragment = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFragment.jpg"));
+            imgFragment = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeFragment.jpg"));
 
         } catch (IOException ex) {
             System.out.println("Image not found.");
