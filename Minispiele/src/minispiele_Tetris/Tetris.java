@@ -143,7 +143,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     @Override
     public void run() {
         c.getT().start();
-        int x = 0, y = 0, y1;
+        int x = 0, y = 0;
         int[] geprüft;
         boolean isOK;
         boolean isLine;
