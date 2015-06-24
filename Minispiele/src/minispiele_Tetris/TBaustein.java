@@ -45,7 +45,7 @@ public class TBaustein extends JComponent {
         //Y=30;
         queue = 0;
         try {
-            imgs = new Image[7];
+            imgs = new Image[8];
             imgs[0] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_blau.jpg"));
             imgs[1] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_cyan.jpg"));
             imgs[2] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_dunkelgrün.jpg"));
@@ -53,6 +53,7 @@ public class TBaustein extends JComponent {
             imgs[4] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_grün.jpg"));
             imgs[5] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_lila.jpg"));
             imgs[6] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_rot.jpg"));
+            imgs[7] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_Test.jpg"));
 
         } catch (IOException e) {
             System.out.println("Couldn't find Image.");

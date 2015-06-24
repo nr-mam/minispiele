@@ -107,7 +107,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         gr.drawImage(img, 0, 0, this);
-        
+
         block.paintComponent(gr);
         for (int i = 0; i < spielflaeche.length; i++) {
             for (int j = 0; j < spielflaeche[i].length; j++) {
@@ -117,7 +117,8 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             }
 
         }
-       //blockTest.img = block.getImgs(1);
+        //Folgende (auskommentierte) Zeilen dienen nur zur Fehlerbehebung
+        //blockTest.img = block.getImgs(7);
         //blockTest.paintComponent(gr);
         scores.paintComponent(gr);
         gr.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
@@ -156,6 +157,10 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
             rechtsTesten(x, y, isOK);
 
             boolean isUnten = block.moveBlockDown(GRENZE_UNTEN);
+            boolean blockFestigen = untenTesten(x, y);
+            if (isUnten) {
+                blockFestigen = true;
+            }
 
             //Pfeiltaste nach unten wurde gedrückt.
             if (unten) {
@@ -169,37 +174,14 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 geprüft[i] = 0;
             }
 
-            for (int i = block.getBlockForm().length - 1; i >= 0; i--) {
-                for (int j = 0; j < block.getBlockForm()[i].length; j++) {
-                    x = (((block.getX() / 30) + i));
-                    y = (((block.getY() / 30) + j));
-                    if (block.getBlockForm()[i][j] == 0 && geprüft[j] == 0) {
-                        geprüft[j] = 1;
-                        if (spielflaeche[x][y] != -1) {
-                            isUnten = true;
-                        }
-                    }
-
-                    if (block.getBlockForm()[i][j] == 1) {
-                        y1 = y + 1;
-                        if (spielflaeche[x][y1] != -1) {
-                            isUnten = true;
-                        }
-                    }
-
-                }
-
-            }
             //Erhöhung des Levels, sobald die Bedinngungen dafür erfüllt sind.
             if (c.getMin() >= 1 && scores.getLines() >= scores.getLevel() * 2 && scores.getScore() > scores.getLevel() * 5000) {
                 scores.level++;
                 c.resetAll();
             }
-            
-            //untenTesten(isUnten);
-            // Ist der Block unten angekommen?
-            
-            if (isUnten) {
+
+            //aktuellen Block verfestigen
+            if (blockFestigen) {
                 x = ((block.getY() / 30));
                 if (x < 2) {
                     start = false;
@@ -265,7 +247,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 }
 
             }
-            
+
             try {
                 Thread.sleep(wartezeit);
             } catch (InterruptedException ex) {
@@ -302,11 +284,8 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 block.RotateBlock(GRENZE_RECHTS);
                 //block = blockTest;
             } else {
-            blockTest = block;
+                blockTest = block;
             }
-            
-
-            
 
         }
     }
@@ -380,25 +359,25 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         }
 
     }
-    
-    private void untenTesten(int x, int y, boolean isUnten, boolean isOK) {
-        if(isUnten){
-        blockTest.X = block.getX() + 30;
-            blockTest.Y = block.getY();
-            isOK = true;
-            for (int i = 0; i < blockTest.getBlockForm().length; i++) {
-                for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
-                    x = (((blockTest.getX() / 30) + i));
-                    y = (((blockTest.getY() / 30) + j));
-                    if (blockTest.getBlockForm()[i][j] == 1) {
-                        if (spielflaeche[x][y] != -1) {
-                            isOK = false;
-                        }
+
+    private boolean untenTesten(int x, int y) {
+
+        blockTest.X = block.getX();
+        blockTest.Y = block.getY() + 30;
+        for (int i = 0; i < blockTest.getBlockForm().length; i++) {
+            for (int j = 0; j < blockTest.getBlockForm()[i].length; j++) {
+                x = (((blockTest.getX() / 30) + i));
+                y = (((blockTest.getY() / 30) + j));
+                if (blockTest.getBlockForm()[i][j] == 1) {
+                    if (spielflaeche[x][y] != -1) {
+                        return true;
                     }
                 }
-
             }
+
         }
+        return false;
+
     }
 
     @Override
@@ -429,7 +408,5 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         unten = false;
         rotieren = false;
     }
-
-    
 
 }
