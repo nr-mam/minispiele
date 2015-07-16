@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_Tetris;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import minispiele_PingPong.PingPong;
 
 /**
  *
@@ -46,14 +39,14 @@ public class TBaustein extends JComponent {
         queue = 0;
         try {
             imgs = new Image[8];
-            imgs[0] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_blau.jpg"));
-            imgs[1] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_cyan.jpg"));
-            imgs[2] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_dunkelgrün.jpg"));
-            imgs[3] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_gelb.jpg"));
-            imgs[4] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_grün.jpg"));
-            imgs[5] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_lila.jpg"));
-            imgs[6] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_rot.jpg"));
-            imgs[7] = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\Block_Test.jpg"));
+            imgs[0] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_blau.jpg"));
+            imgs[1] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_cyan.jpg"));
+            imgs[2] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_dunkelgrün.jpg"));
+            imgs[3] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_gelb.jpg"));
+            imgs[4] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_grün.jpg"));
+            imgs[5] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_lila.jpg"));
+            imgs[6] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_rot.jpg"));
+            imgs[7] = ImageIO.read(this.getClass().getResource("/images/Tetris/Block_Test.jpg"));
 
         } catch (IOException e) {
             System.out.println("Couldn't find Image.");

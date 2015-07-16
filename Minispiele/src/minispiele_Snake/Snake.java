@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_Snake;
 
 import java.awt.Dimension;
@@ -16,7 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.paint.Color;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,14 +52,14 @@ public class Snake extends JPanel implements Runnable, KeyListener {
     }
     public Snake() {
         try {
-            ImgGameOver = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\GameOver_1.jpg"));
+            ImgGameOver = ImageIO.read(this.getClass().getResource("/images/Snake/GameOver_1.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-            imgField = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SpielfeldKlein.jpg"));
+            imgField = ImageIO.read(this.getClass().getResource("/images/Snake/SpielfeldKlein.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Snake.class.getName()).log(Level.SEVERE, null, ex);

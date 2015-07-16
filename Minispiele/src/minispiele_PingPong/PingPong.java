@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_PingPong;
 
 import java.awt.*;
@@ -152,6 +148,7 @@ public final class PingPong extends JPanel implements Runnable, KeyListener {
 
     /**
      * Zeichnet den Ball, Spieler1 und den KI oder Spieler2.
+     * @param gr
      */
     @Override
     public void paintComponent(Graphics gr) {

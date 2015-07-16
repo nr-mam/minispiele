@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_Tetris;
 
 import java.awt.Color;
@@ -12,17 +8,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import minispiele.Clock;
 
@@ -41,7 +31,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
     private int wartezeit;
     private int[][] spielflaeche;
     private TScore scores;
-    private TetrisFrame tetrisFrame;
+    private final TetrisFrame tetrisFrame;
     public Thread thread;
     private Clock c;
 
@@ -61,7 +51,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
         end = false;
         initialisiereSpielflaeche();
         try {
-            img = ImageIO.read(this.getClass().getResource("..\\images\\Tetris_img\\TetrisFeld_Design_01.jpg"));
+            img = ImageIO.read(this.getClass().getResource("/images/Tetris/TetrisFeld_Design_01.jpg"));
 
         } catch (IOException ex) {
             Logger.getLogger(Tetris.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,9 +74,7 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 spielflaeche[i][j] = -1;
                 // -1 = kein BausteinBlock befindet sich an dieser Position
             }
-
         }
-
     }
 
     private void GUI() throws IOException {
@@ -208,14 +196,14 @@ public class Tetris extends JPanel implements Runnable, KeyListener {
                 scores.ScoreAdd((block.getXmax() + 1) * (block.getYmax() + 1) * scores.getLevel());
 
                 isLine = false;
-                int c = 0;
+                int c1 = 0;
                 for (int j = 1; j < spielflaeche[0].length; j++) {
-                    c = 0;
+                    c1 = 0;
                     for (int i = 1; i < 13; i++) {
                         if (spielflaeche[i][j] != -1) {
                             isLine = true;
-                            c++;
-                            if (c == 12) {
+                            c1++;
+                            if (c1 == 12) {
 
                                 scores.LinesAdd(1);
                                 scores.ScoreAdd(200 * scores.getLevel());

@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_PingPong;
 
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import static minispiele_PingPong.PingPong.HEIGHT_FIELD;
@@ -28,7 +23,6 @@ public class PingPongFrame extends javax.swing.JFrame {
      * Erstellt das Frame vom PingPong Spiel.
      * @param title Titel des Spieles
      * @param comp das Spiel an sich (JPanel)
-     * @param ball der Spielball
      */
     public PingPongFrame(String title, Component comp) {
         initComponents();
@@ -76,7 +70,7 @@ public class PingPongFrame extends javax.swing.JFrame {
         tfPunkteRechts.setBounds(620, 10, 110, 60);
 
         labelHintergrund.setBackground(new java.awt.Color(255, 0, 0));
-        labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPongFeld.jpg"))); // NOI18N
+        labelHintergrund.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PingPong/PingPongFeld.jpg"))); // NOI18N
         layers.add(labelHintergrund);
         labelHintergrund.setBounds(0, 0, 1200, 750);
 

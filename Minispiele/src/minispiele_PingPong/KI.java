@@ -1,16 +1,9 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package minispiele_PingPong;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * KI ist eine Unterklasse vom Spieler da vieles gleich ist. Nur die Bewegung
@@ -92,18 +85,22 @@ public class KI extends Spieler {
         gr.fillRect(x, y, BREITE_SPIELER, HOEHE_SPIELER);
     }
 
+    @Override
     public int getHOEHE() {
         return HOEHE_SPIELER;
     }
 
+    @Override
     public int getBREITE() {
         return BREITE_SPIELER;
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }

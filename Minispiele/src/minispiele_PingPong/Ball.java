@@ -1,9 +1,4 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package minispiele_PingPong;
 
 import java.awt.*;
@@ -23,8 +18,9 @@ public class Ball extends JComponent {
     public static Double V = 0.0;
     private static final int bHeight = 50, bWidth = 50;
     private Double xGeschw, yGeschw;//Koordinatenänderung
-    private int x, y, schwierigkeit;//Koordinaten
-    private Component comp;
+    private int x, y; //Koordinaten
+    private final int schwierigkeit;
+    private final Component comp;
     private Image PingPongBall;
 
     /**
@@ -56,7 +52,7 @@ public class Ball extends JComponent {
      */
     private Image ladeBall() {
         try {
-            PingPongBall = ImageIO.read(PingPong.class.getResource("../images/PingPongBallGruenCutted.png"));
+            PingPongBall = ImageIO.read(getClass().getResource("/images/PingPong/PingPongBallGruen.png"));
         } catch (IOException e) {
         }
         return PingPongBall;

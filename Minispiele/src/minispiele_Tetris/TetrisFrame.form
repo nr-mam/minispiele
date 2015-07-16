@@ -55,9 +55,8 @@
     <Component class="javax.swing.JLabel" name="jLabelBeenden">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/Tetris_img/Botton_end.jpg"/>
+          <Image iconType="3" name="/images/Tetris/Botton_end.jpg"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelBeendenMousePressed"/>
@@ -67,7 +66,7 @@
     <Component class="javax.swing.JLabel" name="jLabelNeuesSpiel">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/Tetris_img/Botton_neuesSpiel.jpg"/>
+          <Image iconType="3" name="/images/Tetris/Botton_neuesSpiel.jpg"/>
         </Property>
       </Properties>
       <Events>

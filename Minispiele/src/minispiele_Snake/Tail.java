@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_Snake;
 
 import java.awt.Graphics;
@@ -26,7 +22,7 @@ public class Tail extends JComponent {
         xCoordinate = x;
         yCoordinate = y;
         try {
-            imgTail = ImageIO.read(this.getClass().getResource("..\\images\\SnakeFragment.jpg"));
+            imgTail = ImageIO.read(this.getClass().getResource("/imagesSnake/SnakeFragment.jpg"));
 
         } catch (IOException ex) {
             System.out.println("Image not found.");

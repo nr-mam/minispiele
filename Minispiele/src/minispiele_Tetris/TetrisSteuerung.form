@@ -28,7 +28,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/Tetris_img/Botton_neuesSpiel.jpg"/>
+          <Image iconType="3" name="/images/Tetris/Botton_neuesSpiel.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -44,7 +44,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/Tetris_img/Start.jpg"/>
+          <Image iconType="3" name="/images/Tetris/Start.jpg"/>
         </Property>
       </Properties>
       <Constraints>

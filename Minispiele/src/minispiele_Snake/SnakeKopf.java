@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele_Snake;
 
 import java.awt.Component;
@@ -11,8 +7,6 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
@@ -45,7 +39,7 @@ public class SnakeKopf extends JComponent {
         }
 
         try {
-            imgFragment = ImageIO.read(this.getClass().getResource("..\\images\\Snake\\SnakeFragment.jpg"));
+            imgFragment = ImageIO.read(this.getClass().getResource("/images/Snake/SnakeFragment.jpg"));
 
         } catch (IOException ex) {
             System.out.println("Image not found.");

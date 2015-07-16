@@ -6,7 +6,6 @@
 package minispiele_Tetris;
 
 import java.awt.Component;
-import javax.swing.JLayeredPane;
 import static minispiele_PingPong.PingPong.HEIGHT_FIELD;
 import static minispiele_PingPong.PingPong.WIDTH_FIELD;
 
@@ -52,8 +51,7 @@ public class TetrisFrame extends javax.swing.JFrame {
 
         layers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_end.jpg"))); // NOI18N
-        jLabelBeenden.setText("jLabel3");
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_end.jpg"))); // NOI18N
         jLabelBeenden.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabelBeendenMousePressed(evt);
@@ -63,7 +61,7 @@ public class TetrisFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg"))); // NOI18N
+        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel.jpg"))); // NOI18N
         jLabelNeuesSpiel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabelNeuesSpielMousePressed(evt);
@@ -98,20 +96,20 @@ public class TetrisFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelBeendenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMousePressed
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_Beenden.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_Beenden.jpg")));
     }//GEN-LAST:event_jLabelBeendenMousePressed
 
     private void jLabelBeendenMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBeendenMouseReleased
-        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_end.jpg")));
+        jLabelBeenden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_end.jpg")));
         setVisible(false);
     }//GEN-LAST:event_jLabelBeendenMouseReleased
 
     private void jLabelNeuesSpielMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNeuesSpielMousePressed
-        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel_pressed.jpg")));
+        jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel_pressed.jpg")));
     }//GEN-LAST:event_jLabelNeuesSpielMousePressed
 
     private void jLabelNeuesSpielMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNeuesSpielMouseReleased
-       jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg")));
+       jLabelNeuesSpiel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel.jpg")));
        Tetris t = new Tetris();
        //comp = t;
        setVisible(false);

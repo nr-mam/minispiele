@@ -37,7 +37,7 @@ public class TetrisSteuerung extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel.jpg"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel2MousePressed(evt);
@@ -48,18 +48,18 @@ public class TetrisSteuerung extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 140, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Start.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Start.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel_pressed.jpg")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel_pressed.jpg")));
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseReleased
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris_img/Botton_neuesSpiel.jpg")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tetris/Botton_neuesSpiel.jpg")));
         new Tetris();
         setVisible(false);
     }//GEN-LAST:event_jLabel2MouseReleased
@@ -93,6 +93,7 @@ public class TetrisSteuerung extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TetrisSteuerung().setVisible(true);
             }

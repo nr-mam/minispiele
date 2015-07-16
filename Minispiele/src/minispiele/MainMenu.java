@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minispiele;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import minispiele_PingPong.Einstellungen;
 import minispiele_Snake.Snake;
-import minispiele_Tetris.Tetris;
 import minispiele_Tetris.TetrisSteuerung;
 
 /**
@@ -226,13 +217,12 @@ public class MainMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainMenu().setVisible(true);
             }
         });
     }
-
-    private ImageIcon ii;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

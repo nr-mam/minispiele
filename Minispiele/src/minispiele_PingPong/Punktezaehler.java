@@ -5,10 +5,7 @@
  */
 package minispiele_PingPong;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.TextField;
-import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 /**
@@ -17,7 +14,7 @@ import javax.swing.JTextField;
  */
 public class Punktezaehler {
 
-    private Ball ball;
+    private final Ball ball;
     private JTextField tf;
     private int zaehler1, zaehler2, seite, maxPunkte;
     private Einstellungen einst;
@@ -77,17 +74,13 @@ public class Punktezaehler {
             if (seite == -1) {
                 zaehler1++;
                 tf.setText(Integer.toString(zaehler1));
-
             }
         }
         if (kollisionRechtsPruefen(ball)) {
             if (seite == 1) {
                 zaehler2++;
                 tf.setText(Integer.toString(zaehler2));
-
             }
         }
-
     }
-
 }
